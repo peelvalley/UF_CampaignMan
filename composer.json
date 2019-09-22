@@ -9,5 +9,10 @@
             "email": "info@peelvalley.com.au"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "UserFrosting\\Sprinkle\\uf_campaignman\\": "src/"
+        }
+    }
 }

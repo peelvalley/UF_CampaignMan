@@ -5,7 +5,7 @@ namespace UserFrosting\Sprinkle\CampaignMan\Database\Migrations\v100;
 use Illuminate\Database\Schema\Blueprint;
 use UserFrosting\System\Bakery\Migration;
 
-class CampaignsSubsTable extends Migration
+class CampaignSubsTable extends Migration
 {
     public static $dependencies = [
         '\UserFrosting\Sprinkle\CampaignMan\Database\Migrations\v100\SubscribersTable',

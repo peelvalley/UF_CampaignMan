@@ -1,0 +1,13 @@
+{
+    "name": "peelvalley/uf_campaignman",
+    "description": "Email Campaign Management Sprinkle for the Userfrosting Framework",
+    "type": "userfrosting-sprinkle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "PeelValley Software",
+            "email": "info@peelvalley.com.au"
+        }
+    ],
+    "require": {}
+}

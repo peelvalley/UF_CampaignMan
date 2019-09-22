@@ -14,5 +14,8 @@
         "psr-4": {
             "UserFrosting\\Sprinkle\\CampaignMan\\": "src/"
         }
+    },
+    "extra": {
+        "installer-name": "CampaignMan"
     }
 }

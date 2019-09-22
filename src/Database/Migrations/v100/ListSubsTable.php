@@ -27,8 +27,8 @@ class ListSubsTable extends Migration
                 $table->timestamps();
                 $table->index('enabled');
 
-                $table->foreign('list_id')->references('id')->on('mailing_lists');
-                $table->foreign('subscriber_id')->references('id')->on('subscribers');
+                $table->foreign('list_id')->references('id')->on('mailing_lists')->onDelete('cascade')->onUpdate('cascade');
+                $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('cascade')->onUpdate('cascade');
 
                 $table->engine = 'InnoDB';
                 $table->collation = 'utf8mb4_unicode_520_ci';

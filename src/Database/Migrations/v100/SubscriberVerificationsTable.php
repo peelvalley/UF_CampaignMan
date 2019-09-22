@@ -31,7 +31,7 @@ class SubscriberVerificationsTable extends Migration
                 $table->engine = 'InnoDB';
                 $table->collation = 'utf8_unicode_ci';
                 $table->charset = 'utf8';
-                $table->foreign('subscriber_id')->references('id')->on('subscribers');
+                $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('cascade')->onUpdate('cascade');
                 $table->index('subscriber_id');
                 $table->index('hash');
             });

@@ -26,8 +26,8 @@ class CampaignSubsTable extends Migration
 
                 $table->timestamps();
 
-                $table->foreign('campaign_id')->references('id')->on('campaigns');
-                $table->foreign('subscriber_id')->references('id')->on('subscribers');
+                $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade')->onUpdate('cascade');
+                $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('cascade')->onUpdate('cascade');
 
                 $table->engine = 'InnoDB';
                 $table->collation = 'utf8mb4_unicode_520_ci';

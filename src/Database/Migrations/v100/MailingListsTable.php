@@ -7,6 +7,10 @@ use UserFrosting\System\Bakery\Migration;
 
 class MailingListsTable extends Migration
 {
+    public static $dependencies = [
+        '\UserFrosting\Sprinkle\Account\Database\Migrations\v400\GroupsTable',
+    ];
+
     /**
     * {@inheritdoc}
     */

@@ -1,11 +1,11 @@
 <?php
 
-namespace UserFrosting\Sprinkle\GroupMan\Database\Seeds;
+namespace \UserFrosting\Sprinkle\CampaignMan\Database\Seeds;
 
 use UserFrosting\Sprinkle\Core\Database\Seeder\BaseSeed;
 use UserFrosting\Sprinkle\Account\Database\Models\Permission;
 
-class GroupManPermissions extends BaseSeed
+class CampaignManPermissions extends BaseSeed
 {
     /**
      * {@inheritDoc}

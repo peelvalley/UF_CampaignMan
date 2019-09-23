@@ -1,6 +1,6 @@
 <?php
 
-namespace \UserFrosting\Sprinkle\CampaignMan\Database\Seeds;
+namespace UserFrosting\Sprinkle\CampaignMan\Database\Seeds;
 
 use UserFrosting\Sprinkle\Core\Database\Seeder\BaseSeed;
 use UserFrosting\Sprinkle\Account\Database\Models\Permission;

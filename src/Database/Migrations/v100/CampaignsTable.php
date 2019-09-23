@@ -3,7 +3,7 @@
 namespace UserFrosting\Sprinkle\CampaignMan\Database\Migrations\v100;
 
 use Illuminate\Database\Schema\Blueprint;
-use UserFrosting\System\Bakery\Migration;
+use UserFrosting\Sprinkle\Core\Database\Migration;
 
 class CampaignsTable extends Migration
 {

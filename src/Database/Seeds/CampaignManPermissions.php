@@ -69,7 +69,7 @@ class CampaignManPermissions extends BaseSeed
     {
         $roleGroupAdmin = Role::where('slug', 'group-admin')->first();
         if ($roleGroupAdmin) {
-            $roleGroupAdmin->permissions()->sync([
+            $roleGroupAdmin->permissions()->syncWithoutDetaching([
                 $permissions['group_create_mailing_list']->id,
             ]);
         }

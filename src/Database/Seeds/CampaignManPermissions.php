@@ -4,6 +4,7 @@ namespace UserFrosting\Sprinkle\CampaignMan\Database\Seeds;
 
 use UserFrosting\Sprinkle\Core\Database\Seeder\BaseSeed;
 use UserFrosting\Sprinkle\Account\Database\Models\Permission;
+use UserFrosting\Sprinkle\Account\Database\Models\Role;
 
 class CampaignManPermissions extends BaseSeed
 {

@@ -7,10 +7,6 @@ use UserFrosting\Sprinkle\Core\Database\Migration;
 
 class CampaignsTable extends Migration
 {
-    public static $dependencies = [
-        '\UserFrosting\Sprinkle\Account\Database\Migrations\v400\GroupsTable',
-    ];
-
     /**
     * {@inheritdoc}
     */

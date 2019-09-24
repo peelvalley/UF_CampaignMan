@@ -29,8 +29,9 @@ class SubscriberVerificationsTable extends Migration
                 $table->timestamps();
 
                 $table->engine = 'InnoDB';
-                $table->collation = 'utf8_unicode_ci';
-                $table->charset = 'utf8';
+                $table->collation = 'utf8mb4_unicode_520_ci';
+                $table->charset = 'utf8mb4';
+
                 $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('cascade')->onUpdate('cascade');
                 $table->index('subscriber_id');
                 $table->index('hash');

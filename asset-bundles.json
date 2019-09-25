@@ -2,7 +2,8 @@
     "bundle": {
         "js/pages/mailing-lists": {
             "scripts": [
-                "CampaignMan/js/pages/mailing-lists.js"
+                "CampaignMan/js/pages/mailing-lists.js",
+                "CampaignMan/js/widgets/mailing-lists.js"
             ],
             "options": {
                 "result": {

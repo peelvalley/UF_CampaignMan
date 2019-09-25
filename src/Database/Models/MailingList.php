@@ -18,6 +18,7 @@ class MailingList extends Model
     protected $table = 'mailing_lists';
 
     protected $fillable = [
+        'group_id',
         'description',
         'metadata'
     ];

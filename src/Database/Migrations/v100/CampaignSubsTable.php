@@ -23,9 +23,11 @@ class CampaignSubsTable extends Migration
                 $table->increments('id');
                 $table->integer('campaign_id')->unsigned();
                 $table->integer('subscriber_id')->unsigned();
+                $table->string('status', 15);
 
                 $table->timestamps();
 
+                $table->index('status');
                 $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade')->onUpdate('cascade');
                 $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('cascade')->onUpdate('cascade');
 

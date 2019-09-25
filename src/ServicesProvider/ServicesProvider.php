@@ -23,6 +23,8 @@ class ServicesProvider
             $classMapper->setClassMapping('mailing_list', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\MailingList');
             $classMapper->setClassMapping('subscriber', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\Subscriber');
             $classMapper->setClassMapping('sub_verification', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\SubscriberVerification');
+            $classMapper->setClassMapping('mailing_list_sprunje', 'UserFrosting\Sprinkle\CampaignMan\Database\Sprunje\MailingListSprunje');
+
             return $classMapper;
         });
     }

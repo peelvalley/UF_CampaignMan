@@ -15,7 +15,7 @@ $app->group('/mailing_lists', function () {
 
 
 
-$app->group('/api/events', function () {
+$app->group('/api/mailing_lists', function () {
     $this->get('', 'UserFrosting\Sprinkle\CampaignMan\Controller\MailingListController:getList');
 
     $this->post('', 'UserFrosting\Sprinkle\CampaignMan\Controller\MailingListController:create');
@@ -31,6 +31,6 @@ $app->group('/api/events', function () {
 
 })->add('authGuard')->add(new NoCache());
 
-$app->group('/modals/events', function () {
+$app->group('/modals/mailing_lists', function () {
     $this->get('/confirm-delete', 'UserFrosting\Sprinkle\CampaignMan\Controller\MailingListController:getModalConfirmDelete');
 })->add('authGuard')->add(new NoCache());

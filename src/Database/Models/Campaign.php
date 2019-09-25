@@ -18,6 +18,7 @@ class Campaign extends Model
     protected $table = 'campaigns';
 
     protected $fillable = [
+        'status',
         'metadata'
     ];
 

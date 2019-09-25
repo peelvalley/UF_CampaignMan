@@ -20,7 +20,9 @@ class MailingListSprunje extends Sprunje
 
     protected $listable = [];
 
-    protected $sortable = [];
+    protected $sortable = [
+        'description'
+    ];
 
     protected $filterable = [];
 

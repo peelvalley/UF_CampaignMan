@@ -1,0 +1,19 @@
+{
+    "bundle": {
+        "js/pages/mailing-lists": {
+            "scripts": [
+
+            ],
+            "options": {
+                "result": {
+                    "type": {
+                        "scripts": "plain"
+                    }
+                },
+                "sprinkle": {
+                    "onCollision": "merge"
+                }
+            }
+        }
+    }
+}

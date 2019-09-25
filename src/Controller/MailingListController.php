@@ -1,6 +1,6 @@
 <?php
 
-namespace UserFrosting\Sprinkle\CampaignMan\Controllers;
+namespace UserFrosting\Sprinkle\CampaignMan\Controller;
 
 use Interop\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface as Response;

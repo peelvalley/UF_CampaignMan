@@ -15,10 +15,13 @@ class CampaignsTable extends Migration
         if (!$this->schema->hasTable('campaigns')) {
             $this->schema->create('campaigns', function (Blueprint $table) {
                 $table->increments('id');
+                $table->string('status', 15);
                 $table->json('metadata')->nullable();
 
                 $table->softDeletes();
                 $table->timestamps();
+
+                $table->index('status');
 
                 $table->engine = 'InnoDB';
                 $table->collation = 'utf8mb4_unicode_520_ci';

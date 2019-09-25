@@ -21,10 +21,13 @@ class MailingListSprunje extends Sprunje
     protected $listable = [];
 
     protected $sortable = [
-        'description'
+        'description',
+        'group_name'
     ];
 
-    protected $filterable = [];
+    protected $filterable = [
+        'group_name'
+    ];
 
     /**
      * {@inheritdoc}

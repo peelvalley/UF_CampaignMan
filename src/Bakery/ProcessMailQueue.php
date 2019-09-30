@@ -1,7 +1,7 @@
 <?php
 
 
-namespace UserFrosting\Sprinkle\Core\Bakery;
+namespace UserFrosting\Sprinkle\CampaignMan\Bakery;
 
 use Carbon\Carbon;
 use Symfony\Component\Console\Input\InputInterface;

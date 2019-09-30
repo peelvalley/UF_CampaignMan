@@ -47,6 +47,8 @@ class ProcessMailQueue extends BaseCommand
             $completed = $queueCount - $remaining +1;
             $this->io->writeln("Sending item {$completed} of {$queueCount}");
             $this->io->writeln(json_encode($config['address_book.admin']));
+            $this->io->writeln(json_encode($mailItem->from));
+
 
             try {
                 // Create and send email
@@ -96,8 +98,8 @@ class ProcessMailQueue extends BaseCommand
                 $this->io->writeln($message->getReplyEmail());
                 $this->io->writeln($message->getReplyName());
 
-                //$this->ci->mailer->send($message);
-                //$mailItem->delete();
+                $this->ci->mailer->send($message);
+                $mailItem->delete();
                 $this->io->success("Email sent");
 
             } catch (Exception $e) {

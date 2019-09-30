@@ -15,7 +15,7 @@ class MailingQueue extends Model
     protected $table = 'mailing_queue';
 
     protected $fillable = [
-        'template_name',
+        'template',
         'to',
         'from',
         'data',

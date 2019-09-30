@@ -55,7 +55,14 @@ class ProcessMailQueue extends BaseCommand
                         ->addParams(
                             array_merge($mailItem->data, flatten(
                                 array_map(function ($paramInfo) {
-                                    return [$paramInfo['paramName'] => call_user_func_array(array($classMapper, $paramInfo['function']), $paramInfo['functionParams'])];
+                                    return [
+                                        $paramInfo['paramName'] => call_user_func_array(
+                                            array(
+                                                $classMapper,
+                                                $paramInfo['function']),
+                                                $paramInfo['functionParams']
+                                            )
+                                    ];
                                 }, $mailItem->data['params']) ?? []
                             )
                         ));
@@ -69,7 +76,14 @@ class ProcessMailQueue extends BaseCommand
                         $pdf = generatePDF($attachment['template'],
                             array_merge($attachment['data'], flatten(
                                 array_map(function ($paramInfo) {
-                                    return [$paramInfo['paramName'] => call_user_func_array(array($classMapper, $paramInfo['function']), $paramInfo['functionParams'])];
+                                    return [
+                                        $paramInfo['paramName'] => call_user_func_array(
+                                        array(
+                                            $classMapper,
+                                            $paramInfo['function']),
+                                            $paramInfo['functionParams']
+                                        )
+                                    ];
                                 }, $attachment['params']) ?? []
                             )
                         ));

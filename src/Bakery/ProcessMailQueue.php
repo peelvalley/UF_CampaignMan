@@ -71,22 +71,17 @@ class ProcessMailQueue extends BaseCommand
                         );
 
                 foreach ($mailItem->attachments as $attachment) {
-                    $this->io->writeln(json_encode($attachment['params']));
                     if ($attachment['type'] == 'pdf') {
                         $pdf = $this->generatePDF($attachment['template'],
                             array_merge($attachment['data'] ?? [], ... array_map(function ($paramInfo) use ($classMapper) {
-                                    $this->io->writeln(json_encode($paramInfo));
-                                    $result = [
-                                        $paramInfo['paramName'] => call_user_func_array(
-                                            array(
-                                                $classMapper,
-                                                $paramInfo['function']),
-                                            $paramInfo['functionParams']
-                                            )
+                                return [
+                                    $paramInfo['paramName'] => call_user_func_array(
+                                        array(
+                                            $classMapper,
+                                            $paramInfo['function']),
+                                        $paramInfo['functionParams']
+                                        )
                                     ];
-                                    $this->io->writeln(json_encode($result));
-                                    return $result;
-
                                 }, $attachment['params']) ?? []
                             )
                         );
@@ -109,7 +104,6 @@ class ProcessMailQueue extends BaseCommand
     }
     private function generatePDF($template, $params=[])
     {
-        $this->io->writeln(json_encode($params));
         $pdf = new Html2Pdf('P', 'A4', 'en');
 
         $contents = $this->ci->view->fetch($template, $params);

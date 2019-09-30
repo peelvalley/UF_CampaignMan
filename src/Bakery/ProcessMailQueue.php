@@ -78,12 +78,15 @@ class ProcessMailQueue extends BaseCommand
                             array_merge($attachment['data'] ?? [], flatten(
                                 array_map(function ($paramInfo) {
                                     $this->io->writeln(json_encode($paramInfo));
-                                    return [
+                                    $result = [
                                         $paramInfo['paramName'] => call_user_func_array(
                                         $classMapper->staticMethod,
                                         $paramInfo['functionParams']
                                         )
                                     ];
+                                    $this->io->writeln(json_encode($result));
+                                    return $result;
+                                        
                                 }, $attachment['params']) ?? []
                             )
                         ));

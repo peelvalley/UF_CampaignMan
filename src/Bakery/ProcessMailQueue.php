@@ -46,16 +46,13 @@ class ProcessMailQueue extends BaseCommand
             $remaining = $classMapper->staticMethod('mailing_queue','count');
             $completed = $queueCount - $remaining +1;
             $this->io->writeln("Sending item {$completed} of {$queueCount}");
-            $this->io->writeln(json_encode($config['address_book.admin']));
-            $this->io->writeln(json_encode($mailItem->from));
-
 
             try {
                 // Create and send email
                 $message = new TwigMailMessage($this->ci->view, $mailItem->template);
                 $message->from($mailItem->from ? [
-                    'email' => $mailItem->from ['email'],
-                    'name' => $mailItem->from ['name']
+                    'email' => $mailItem->from['email'],
+                    'name' => $mailItem->from['name']
 
                 ] : $config['address_book.admin'])
                         ->addEmailRecipient(new EmailRecipient(...$mailItem->to))
@@ -95,12 +92,6 @@ class ProcessMailQueue extends BaseCommand
                         throw new Exception("{$attachment['type']} not implemented");
                     }
                 }
-
-
-                $this->io->writeln($message->getFromEmail());
-                $this->io->writeln($message->getFromName());
-                $this->io->writeln($message->getReplyEmail());
-                $this->io->writeln($message->getReplyName());
 
                 $this->ci->mailer->send($message);
                 $mailItem->delete();

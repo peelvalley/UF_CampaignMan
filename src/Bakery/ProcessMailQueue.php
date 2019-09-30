@@ -106,6 +106,7 @@ class ProcessMailQueue extends BaseCommand
     }
     private function generatePDF($template, $params=[])
     {
+        $this->io->writeln(json_encode($params));
         $pdf = new Html2Pdf('P', 'A4', 'en');
 
         $contents = $this->ci->view->fetch($template, $params);

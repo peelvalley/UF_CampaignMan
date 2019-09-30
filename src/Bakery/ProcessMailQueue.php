@@ -91,6 +91,11 @@ class ProcessMailQueue extends BaseCommand
                 }
 
 
+                $this->io->writeln($message->getFromEmail());
+                $this->io->writeln($message->getFromName());
+                $this->io->writeln($message->getReplyEmail());
+                $this->io->writeln($message->getReplyName());
+
                 //$this->ci->mailer->send($message);
                 //$mailItem->delete();
                 $this->io->success("Email sent");

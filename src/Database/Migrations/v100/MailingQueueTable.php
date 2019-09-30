@@ -17,6 +17,7 @@ class MailingQueueTable extends Migration
             $this->schema->create('mailing_queue', function (Blueprint $table) {
                 $table->increments('id');
                 $table->json('data')->nullable();
+                $table->string('type', 15);
 
                 $table->timestamps();
 

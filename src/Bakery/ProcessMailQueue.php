@@ -73,7 +73,7 @@ class ProcessMailQueue extends BaseCommand
 
                 foreach ($mailItem->attachments as $attachment) {
                     if ($attachment['type'] == 'pdf') {
-                        $pdf = generatePDF($attachment['template'],
+                        $pdf = $this->generatePDF($attachment['template'],
                             array_merge($attachment['data'], flatten(
                                 array_map(function ($paramInfo) {
                                     return [
@@ -104,19 +104,20 @@ class ProcessMailQueue extends BaseCommand
             $phpMailer->clearAttachments();
         }
     }
+    private function generatePDF($template, $params=[])
+    {
+        $pdf = new Html2Pdf('P', 'A4', 'en');
+
+        $contents = $this->ci->view->fetch($template, $params);
+
+        $pdf->writeHTML($contents);
+
+        return $pdf;
+    }
 }
 
 
-function generatePDF($template, $params=[])
-{
-    $pdf = new Html2Pdf('P', 'A4', 'en');
 
-    $contents = $this->ci->view->fetch($template, $params);
-
-    $pdf->writeHTML($contents);
-
-    return $pdf;
-}
 
 
 function flatten(array $array) {

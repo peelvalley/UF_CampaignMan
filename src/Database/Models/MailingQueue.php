@@ -9,7 +9,6 @@ use UserFrosting\Sprinkle\Core\Database\Models\Model;
 
 class MailingQueue extends Model
 {
-    use SoftDeletes;
     /**
      * @var string The name of the table for the current model.
      */

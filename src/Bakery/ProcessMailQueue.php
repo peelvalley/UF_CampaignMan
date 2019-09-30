@@ -57,8 +57,7 @@ class ProcessMailQueue extends BaseCommand
                 ] : $config['address_book.admin'])
                         ->addEmailRecipient(new EmailRecipient(...$mailItem->to))
                         ->addParams(
-                            array_merge($mailItem->data, flatten(
-                                array_map(function ($paramInfo) {
+                            array_merge($mailItem->data, ... array_map(function ($paramInfo) {
                                     return [
                                         $paramInfo['paramName'] => call_user_func_array(
                                             array(
@@ -69,7 +68,7 @@ class ProcessMailQueue extends BaseCommand
                                     ];
                                 }, $mailItem->data['params']) ?? []
                             )
-                        ));
+                        );
 
                 foreach ($mailItem->attachments as $attachment) {
                     $this->io->writeln(json_encode($attachment['params']));
@@ -119,12 +118,3 @@ class ProcessMailQueue extends BaseCommand
     }
 }
 
-
-
-
-
-function flatten(array $array) {
-    $result = array();
-    array_walk_recursive($array, function($a) use (&$result) { $result[] = $a; });
-    return $result;
-}

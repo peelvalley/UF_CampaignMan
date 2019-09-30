@@ -64,7 +64,7 @@ class ProcessMailQueue extends BaseCommand
                                             array(
                                                 $classMapper,
                                                 $paramInfo['function']),
-                                                $paramInfo['functionParams']
+                                            $paramInfo['functionParams']
                                             )
                                     ];
                                 }, $mailItem->data['params']) ?? []
@@ -83,7 +83,7 @@ class ProcessMailQueue extends BaseCommand
                                         array(
                                             $classMapper,
                                             $paramInfo['function']),
-                                            $paramInfo['functionParams']
+                                        $paramInfo['functionParams']
                                         )
                                     ];
                                 }, $attachment['params']) ?? []

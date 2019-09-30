@@ -76,6 +76,7 @@ class ProcessMailQueue extends BaseCommand
                         $pdf = $this->generatePDF($attachment['template'],
                             array_merge($attachment['data'] ?? [], flatten(
                                 array_map(function ($paramInfo) {
+                                    $this->io->writeln(json_encode($paramInfo));
                                     return [
                                         $paramInfo['paramName'] => call_user_func_array(
                                         array(

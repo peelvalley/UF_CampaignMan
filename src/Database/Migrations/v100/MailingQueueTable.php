@@ -16,7 +16,9 @@ class MailingQueueTable extends Migration
         if (!$this->schema->hasTable('mailing_queue')) {
             $this->schema->create('mailing_queue', function (Blueprint $table) {
                 $table->increments('id');
-                $table->string('template_name', 255);
+                $table->string('template', 255);
+                $table->string('to', 255);
+                $table->string('from', 255)->nullable();
                 $table->json('data')->nullable();
                 $table->json('metadata')->nullable();
                 $table->json('attachments')->nullable();

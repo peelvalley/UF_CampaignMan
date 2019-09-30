@@ -13,10 +13,12 @@ class MailingQueue extends Model
     /**
      * @var string The name of the table for the current model.
      */
-    protected $table = 'mailing_lists';
+    protected $table = 'mailing_queue';
 
     protected $fillable = [
         'template_name',
+        'to',
+        'from',
         'data',
         'metadata',
         'attachments'
@@ -30,6 +32,8 @@ class MailingQueue extends Model
     protected $dates = [];
 
     protected $casts = [
+        'to' => 'array',
+        'from' => 'array',
         'data' => 'array',
         'metadata' => 'array',
         'attachments' => 'array'

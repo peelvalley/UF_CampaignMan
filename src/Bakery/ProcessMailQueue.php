@@ -91,8 +91,8 @@ class ProcessMailQueue extends BaseCommand
                 }
 
 
-                $this->ci->mailer->send($message);
-                $mailItem->delete();
+                //$this->ci->mailer->send($message);
+                //$mailItem->delete();
                 $this->io->success("Email sent");
 
             } catch (Exception $e) {

@@ -38,7 +38,7 @@ class ProcessMailQueue extends BaseCommand
         /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
         $classMapper = $this->ci->classMapper;
 
-        $phpMailler = $this->ci->mailer->getPhpMailer();
+        $phpMailer = $this->ci->mailer->getPhpMailer();
 
         $queueCount = $classMapper->staticMethod('mailing_queue','count');
 

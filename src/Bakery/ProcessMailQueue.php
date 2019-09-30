@@ -49,9 +49,6 @@ class ProcessMailQueue extends BaseCommand
 
             try {
                 // Create and send email
-
-                $this->io->writeln("{$mailItem->from}");
-
                 $message = new TwigMailMessage($this->ci->view, $mailItem->template);
                 $message->from($mailItem->from || $config['address_book.admin'])
                         ->addEmailRecipient(new EmailRecipient($mailItem->to))
@@ -62,6 +59,10 @@ class ProcessMailQueue extends BaseCommand
                                 }, $mailItem->data['params']) ?? []
                             )
                         ));
+                $this->io->writeln($message->getFromEmail());
+                $this->io->writeln($message->getFromName());
+                $this->io->writeln($message->getReplyEmail());
+                $this->io->writeln($message->getReplyName());
 
                 foreach ($mailItem->$attachments as $attachment) {
                     if ($attachment['type'] == 'pdf') {

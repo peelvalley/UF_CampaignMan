@@ -57,7 +57,7 @@ class ProcessMailQueue extends BaseCommand
                             array_merge($mailItem->data, flatten(
                                 array_map(function ($paramInfo) {
                                     return [$paramInfo['paramName'] => call_user_func_array(array($classMapper, $paramInfo['function']), $paramInfo['functionParams'])];
-                                }, $mailItem->data['params'])
+                                }, $mailItem->data['params']) ?? []
                             )
                         ));
 
@@ -67,7 +67,7 @@ class ProcessMailQueue extends BaseCommand
                             array_merge($attachment['data'], flatten(
                                 array_map(function ($paramInfo) {
                                     return [$paramInfo['paramName'] => call_user_func_array(array($classMapper, $paramInfo['function']), $paramInfo['functionParams'])];
-                                }, $attachment['params'])
+                                }, $attachment['params']) ?? []
                             )
                         ));
                         $phpMailer->addStringAttachment($pdf->output(NULL, 'S'), $attachment['filename']);

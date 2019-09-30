@@ -75,8 +75,7 @@ class ProcessMailQueue extends BaseCommand
                     $this->io->writeln(json_encode($attachment['params']));
                     if ($attachment['type'] == 'pdf') {
                         $pdf = $this->generatePDF($attachment['template'],
-                            array_merge($attachment['data'] ?? [], flatten(
-                                array_map(function ($paramInfo) {
+                            array_merge($attachment['data'] ?? [], ... array_map(function ($paramInfo) {
                                     $this->io->writeln(json_encode($paramInfo));
                                     $result = [
                                         $paramInfo['paramName'] => call_user_func_array(
@@ -86,10 +85,10 @@ class ProcessMailQueue extends BaseCommand
                                     ];
                                     $this->io->writeln(json_encode($result));
                                     return $result;
-                                        
+
                                 }, $attachment['params']) ?? []
                             )
-                        ));
+                        );
                         $phpMailer->addStringAttachment($pdf->output(NULL, 'S'), $attachment['filename']);
                     } else {
                         throw new Exception("{$attachment['type']} not implemented");

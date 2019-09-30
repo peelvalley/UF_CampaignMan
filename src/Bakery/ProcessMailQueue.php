@@ -72,6 +72,7 @@ class ProcessMailQueue extends BaseCommand
                         ));
 
                 foreach ($mailItem->attachments as $attachment) {
+                    $this->io->writeln(json_encode($attachment['params']));
                     if ($attachment['type'] == 'pdf') {
                         $pdf = $this->generatePDF($attachment['template'],
                             array_merge($attachment['data'] ?? [], flatten(

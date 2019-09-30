@@ -18,7 +18,6 @@ class MailingQueueTable extends Migration
                 $table->increments('id');
                 $table->json('data')->nullable();
 
-                $table->softDeletes();
                 $table->timestamps();
 
                 $table->engine = 'InnoDB';

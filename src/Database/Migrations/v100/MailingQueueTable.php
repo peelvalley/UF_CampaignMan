@@ -18,6 +18,7 @@ class MailingQueueTable extends Migration
                 $table->increments('id');
                 $table->string('template_name', 255);
                 $table->json('data')->nullable();
+                $table->json('metadata')->nullable();
                 $table->json('attachments')->nullable();
 
                 $table->timestamps();

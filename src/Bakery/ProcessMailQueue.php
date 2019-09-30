@@ -57,7 +57,7 @@ class ProcessMailQueue extends BaseCommand
                 ] : $config['address_book.admin'])
                         ->addEmailRecipient(new EmailRecipient(...$mailItem->to))
                         ->addParams(
-                            array_merge($mailItem->data, ... array_map(function ($paramInfo) {
+                            array_merge($mailItem->data, ... array_map(function ($paramInfo) use ($classMapper) {
                                     return [
                                         $paramInfo['paramName'] => call_user_func_array(
                                             array(
@@ -74,10 +74,15 @@ class ProcessMailQueue extends BaseCommand
                     $this->io->writeln(json_encode($attachment['params']));
                     if ($attachment['type'] == 'pdf') {
                         $pdf = $this->generatePDF($attachment['template'],
-                            array_merge($attachment['data'] ?? [], ... array_map(function ($paramInfo) {
+                            array_merge($attachment['data'] ?? [], ... array_map(function ($paramInfo) use ($classMapper) {
                                     $this->io->writeln(json_encode($paramInfo));
                                     $result = [
-                                        $paramInfo['paramName'] => $classMapper->staticMethod('event', 'find', 1)
+                                        $paramInfo['paramName'] => call_user_func_array(
+                                            array(
+                                                $classMapper,
+                                                $paramInfo['function']),
+                                            $paramInfo['functionParams']
+                                            )
                                     ];
                                     $this->io->writeln(json_encode($result));
                                     return $result;

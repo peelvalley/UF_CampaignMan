@@ -80,9 +80,7 @@ class ProcessMailQueue extends BaseCommand
                                     $this->io->writeln(json_encode($paramInfo));
                                     return [
                                         $paramInfo['paramName'] => call_user_func_array(
-                                        array(
-                                            $classMapper,
-                                            $paramInfo['function']),
+                                        $classMapper->staticMethod,
                                         $paramInfo['functionParams']
                                         )
                                     ];

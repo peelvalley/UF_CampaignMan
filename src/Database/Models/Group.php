@@ -4,10 +4,10 @@
 namespace UserFrosting\Sprinkle\CampaignMan\Database\Models;
 
 
-if (class_exists('UserFrosting\Sprinkle\UserProfile\Database\Models\Group')) {
-    class_alias('UserFrosting\Sprinkle\UserProfile\Database\Models\Group', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\CoreGroup');
+if (class_exists('\UserFrosting\Sprinkle\UserProfile\Database\Models\Group')) {
+    class_alias('\UserFrosting\Sprinkle\UserProfile\Database\Models\Group', '\UserFrosting\Sprinkle\CampaignMan\Database\Models\CoreGroup');
 } else {
-    class_alias('UserFrosting\Sprinkle\Account\Database\Models\Group', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\CoreGroup');
+    class_alias('\UserFrosting\Sprinkle\Account\Database\Models\Group', '\UserFrosting\Sprinkle\CampaignMan\Database\Models\CoreGroup');
 }
 
 class Group extends \UserFrosting\Sprinkle\UserProfile\Database\Models\Group

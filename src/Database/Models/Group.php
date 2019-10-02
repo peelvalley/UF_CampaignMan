@@ -23,14 +23,6 @@ class Group extends \UserFrosting\Sprinkle\UserProfile\Database\Models\Group
         return $this->hasMany($classMapper->getClassMapping('mailing_list'), 'group_id');
     }
 
-    public function debug()
-    {
-        return print_r([
-            'parent' =>get_class_methods(parent),
-            'this' => get_class_methods($this)
-        ], TRUE);
-    }
-
     /**
      * Delete the group's mailing lists when deleting the main model.
      *

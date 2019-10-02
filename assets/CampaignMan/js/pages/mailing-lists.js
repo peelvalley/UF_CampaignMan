@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     $("#widget-mailing-lists").ufTable({
-        dataUrl: `${site.uri.public}/api/${group ? `groups/${group.slug}/` : ""}mailing_lists`,
+        dataUrl: `${site.uri.public}/api/${group ? `groups/g/${group.slug}/` : ""}mailing_lists`,
         useLoadingTransition: site.uf_table.use_loading_transition
     });
 

@@ -10,7 +10,7 @@ if (class_exists('UserFrosting\Sprinkle\UserProfile\Database\Models\Group')) {
     class_alias('UserFrosting\Sprinkle\Account\Database\Models\Group', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\CoreGroup');
 }
 
-class Group extends CoreGroup
+class Group extends UserFrosting\Sprinkle\UserProfile\Database\Models\Group
 {
     /**
      * Eloquent relation to the mailing_lists table.

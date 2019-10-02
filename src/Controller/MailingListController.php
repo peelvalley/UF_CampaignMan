@@ -65,7 +65,7 @@ class MailingListController extends SimpleController
         $classMapper = $this->ci->classMapper;
 
         return $this->ci->view->render($response, 'modals/add-subscriber.html.twig', [
-            'groups' => $classMapper->staticMethod('group', 'where', 'slug', '!=', 'default'),
+            'groups' => $classMapper->staticMethod('group', 'where', 'slug', '!=', 'default')->get(),
             'form' => [
                 'method' => 'POST',
                 'action' => 'api/mailing_lists/add-subscriber',

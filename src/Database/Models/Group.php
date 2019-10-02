@@ -17,6 +17,8 @@ class Group extends CoreGroup
      */
     public function mailingLists()
     {
+        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
+        $classMapper = static::$ci->classMapper;
         return $this->hasMany($classMapper->getClassMapping('mailing_list'), 'group_id');
     }
 

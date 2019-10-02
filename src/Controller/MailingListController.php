@@ -61,21 +61,41 @@ class MailingListController extends SimpleController
 
     public function getModalAddSubscriber(Request $request, Response $response, $args)
     {
-        // GET parameters
-        $params = $request->getQueryParams();
-
-        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-        $authorizer = $this->ci->authorizer;
-        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-        $currentUser = $this->ci->currentUser;
+        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
+        $classMapper = $this->ci->classMapper;
 
         return $this->ci->view->render($response, 'modals/add-subscriber.html.twig', [
-            'event' => $event,
+            'groups' => $classMapper->staticMethod('group', 'get'),
             'form' => [
-                'action' => "api/mailing_lists/add-subscriber",
+                'method' => 'POST',
+                'action' => 'api/mailing_lists/add-subscriber',
             ],
+            'editable' => TRUE
         ]);
     }
+
+    // public function getModalEditSubscriber(Request $request, Response $response, $args)
+    // {
+    //     // GET parameters
+    //     $params = $request->getQueryParams(); // TODO load existing subscriber for edit
+
+    //     /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
+    //     $authorizer = $this->ci->authorizer;
+    //     /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
+    //     $currentUser = $this->ci->currentUser;
+
+    //     /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
+    //     $classMapper = $this->ci->classMapper;
+
+    //     return $this->ci->view->render($response, 'modals/add-subscriber.html.twig', [
+    //         'groups' => $classMapper->staticMethod('group', 'get'),
+    //         'form' => [
+    //             'method' => 'PUT',
+    //             'action' => 'api/subscribers/update',
+    //         ],
+    //         'editable' => TRUE  //TODO add access control
+    //     ]);
+    // }
 
 
 

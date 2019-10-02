@@ -37,6 +37,20 @@ class CampaignManPermissions extends BaseSeed
                 'conditions' => 'equals_num(self.group_id, group.id)',
                 'description' => 'Enables the user to create mailing lists for their own group'
             ]),
+
+            'group_view_mailing_list' => new Permission([
+                'slug' => 'view_mailing_lists',
+                'name' => 'View group mailing lists',
+                'conditions' => 'equals_num(self.group_id, group.id)',
+                'description' => 'Enables the user to view all mailing lists for their own group'
+            ]),
+
+            'view_mailing_lists' => new Permission([
+                'slug' => 'view_mailing_lists',
+                'name' => 'View site mailing lists',
+                'conditions' => 'always()',
+                'description' => 'Enables the user to view all mailing lists for the site'
+            ]),
         ];
     }
 
@@ -71,6 +85,14 @@ class CampaignManPermissions extends BaseSeed
         if ($roleGroupAdmin) {
             $roleGroupAdmin->permissions()->syncWithoutDetaching([
                 $permissions['group_create_mailing_list']->id,
+                $permissions['group_view_mailing_list']->id
+            ]);
+        }
+
+        $roleUser = Role::where('slug', 'site-admin')->first();
+        if ($roleUser) {
+            $roleUser->permissions()->syncWithoutDetaching([
+                $permissions['view_mailing_lists']->id
             ]);
         }
     }

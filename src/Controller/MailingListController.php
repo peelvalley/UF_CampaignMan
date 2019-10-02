@@ -43,7 +43,42 @@ class MailingListController extends SimpleController
         return $sprunje->toResponse($response);
     }
 
+    public function getGroupList(Request $request, Response $response, $args)
+    {
+        // GET parameters
+        $params = $request->getQueryParams();
+        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
+        $authorizer = $this->ci->authorizer;
+        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
+        $currentUser = $this->ci->currentUser;
+        // Access-controlled page
+        if (!$authorizer->checkAccess($currentUser, 'view_mailing_lists')) {
+            throw new ForbiddenException();
+        }
+        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
+        $classMapper = $this->ci->classMapper;
+        $sprunje = $classMapper->createInstance('mailing_list_sprunje', $classMapper, $params);
+        // Be careful how you consume this data - it has not been escaped and contains untrusted user-supplied content.
+        // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
+        return $sprunje->toResponse($response);
+    }
+
     public function pageList(Request $request, Response $response, $args)
+    {
+        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
+        $authorizer = $this->ci->authorizer;
+        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
+        $currentUser = $this->ci->currentUser;
+        // Access-controlled page
+        if (!$authorizer->checkAccess($currentUser, 'view_mailing_lists')) {
+            throw new ForbiddenException();
+        }
+        return $this->ci->view->render($response, 'pages/mailing-lists.html.twig', [
+
+        ]);
+    }
+
+    public function pageGroupList(Request $request, Response $response, $args)
     {
         /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
         $authorizer = $this->ci->authorizer;

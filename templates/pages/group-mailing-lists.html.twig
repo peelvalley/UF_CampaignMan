@@ -21,8 +21,7 @@
                 <div class="box-body">
                     {% include "tables/mailing-lists.html.twig" with {
                             "table" : {
-                                "id" : "table-mailing-lists",
-                                "columns": ["group"]
+                                "id" : "table-mailing-lists"
                             }
                         }
                     %}
@@ -42,7 +41,7 @@
     <!-- Include validation rules -->
     <script>
     {% include "pages/partials/page.js.twig" %}
-        const group = undefined
+    const group = {{json_encode(group) | raw()}}
     </script>
 
     <!-- Include form widgets JS -->

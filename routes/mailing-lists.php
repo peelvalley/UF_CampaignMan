@@ -7,9 +7,6 @@ $app->group('/mailing_lists', function () {
     $this->get('', 'UserFrosting\Sprinkle\CampaignMan\Controller\MailingListController:pageList')
     ->setName('uri_mailing_lists');
 
-    $this->get('/g/{slug}', 'UserFrosting\Sprinkle\CampaignMan\Controller\MailingListController:pagegroupList')
-    ->setName('uri_group_mailing_lists');
-
     $this->get('/create', 'UserFrosting\Sprinkle\CampaignMan\Controller\MailingListController:pageCreate');
 
     $this->get('/ml/{ml_id}', 'UserFrosting\Sprinkle\CampaignMan\Controller\MailingListController:pageInfo');

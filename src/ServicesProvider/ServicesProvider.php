@@ -17,6 +17,7 @@ class ServicesProvider
     public function register($container)
     {
         $container->extend('classMapper', function ($classMapper, $c) {
+            $classMapper->setClassMapping('group', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\Group');
             $classMapper->setClassMapping('campaign', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\Campaign');
             $classMapper->setClassMapping('campaign_sub', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\CampaignSub');
             $classMapper->setClassMapping('list_sub', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\ListSub');

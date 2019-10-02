@@ -19,7 +19,7 @@ class Group extends \UserFrosting\Sprinkle\UserProfile\Database\Models\Group
     public function mailingLists()
     {
         throw new \Exception(print_r([
-            get_class_methods(parent)
+            get_class_methods(parent),
             get_class_methods($this)
         ], TRUE));
         /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */

@@ -21,7 +21,7 @@ use UserFrosting\Support\Repository\Loader\YamlFileLoader;
 
 
 
-class MailingListController extends SimpleController
+class SubscriberController extends SimpleController
 {
 
 

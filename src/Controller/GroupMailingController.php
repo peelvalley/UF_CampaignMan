@@ -3,6 +3,7 @@
 namespace UserFrosting\Sprinkle\CampaignMan\Controller;
 
 use Interop\Container\ContainerInterface;
+use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Exception\NotFoundException;
 use UserFrosting\Fortress\Adapter\JqueryValidationAdapter;

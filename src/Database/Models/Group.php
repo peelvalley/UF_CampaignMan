@@ -12,11 +12,13 @@ if (class_exists('\UserFrosting\Sprinkle\UserProfile\Database\Models\Group')) {
 
 class Group extends \UserFrosting\Sprinkle\UserProfile\Database\Models\Group
 {
+
     /**
      * Eloquent relation to the mailing_lists table.
      */
     public function mailingLists()
     {
+        throw new Exception(get_parent_class($this));
         /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
         $classMapper = static::$ci->classMapper;
         return $this->hasMany($classMapper->getClassMapping('mailing_list'), 'group_id');

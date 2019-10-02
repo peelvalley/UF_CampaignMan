@@ -65,9 +65,9 @@ class GroupMailingController extends GroupController
             'group' => $group
         ])) {
         throw new ForbiddenException();
-    }
+        }
 
-    /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
+        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
         $classMapper = $this->ci->classMapper;
         $sprunje = $classMapper->createInstance('mailing_list_sprunje', $classMapper, $params);
         // Be careful how you consume this data - it has not been escaped and contains untrusted user-supplied content.

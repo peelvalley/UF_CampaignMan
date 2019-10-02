@@ -74,7 +74,6 @@ class GroupMailingController extends GroupController
         // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
         $sprunje->setQuery($group->mailingLists());
         return $response
-                ->withHeader('Content-Type', 'application/json')
-                ->withJson($group->debug(), 200);
+            ->write('<pre>' . $group->debug() . '</pre>');
     }
 }

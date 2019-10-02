@@ -33,4 +33,5 @@ $app->group('/api/mailing_lists', function () {
 
 $app->group('/modals/mailing_lists', function () {
     $this->get('/confirm-delete', 'UserFrosting\Sprinkle\CampaignMan\Controller\MailingListController:getModalConfirmDelete');
+    $this->get('/add-subscriber', 'UserFrosting\Sprinkle\CampaignMan\Controller\MailingListController:getModalAddSubscriber');
 })->add('authGuard')->add(new NoCache());

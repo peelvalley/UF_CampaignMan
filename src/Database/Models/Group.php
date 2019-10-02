@@ -18,13 +18,17 @@ class Group extends \UserFrosting\Sprinkle\UserProfile\Database\Models\Group
      */
     public function mailingLists()
     {
-        throw new \Exception(print_r([
-            get_class_methods(parent),
-            get_class_methods($this)
-        ], TRUE));
         /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
         $classMapper = static::$ci->classMapper;
         return $this->hasMany($classMapper->getClassMapping('mailing_list'), 'group_id');
+    }
+
+    public function debug()
+    {
+        return print_r([
+            'parent' =>get_class_methods(parent),
+            'this' => get_class_methods($this)
+        ], TRUE);
     }
 
     /**

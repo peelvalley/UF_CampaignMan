@@ -41,7 +41,7 @@
     <!-- Include validation rules -->
     <script>
     {% include "pages/partials/page.js.twig" %}
-    const group = {{json_encode(group) | raw()}}
+    const group = {{group | json_encode() | raw()}}
     </script>
 
     <!-- Include form widgets JS -->

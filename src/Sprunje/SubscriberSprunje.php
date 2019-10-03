@@ -8,9 +8,9 @@ use UserFrosting\Sprinkle\Core\Facades\Translator;
 use UserFrosting\Sprinkle\Core\Sprunje\Sprunje;
 
 /**
- * MailingListSprunje.
+ * SubscriberSprunje.
  *
- * Implements Sprunje for the mailing list API.
+ * Implements Sprunje for the subscrber API.
  *
  * @author PeelValley Software (https://peelvalley.com.au)
  */

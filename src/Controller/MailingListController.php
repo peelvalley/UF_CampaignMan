@@ -7,14 +7,10 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use UserFrosting\Fortress\Adapter\JqueryValidationAdapter;
 use UserFrosting\Fortress\RequestSchema;
-use UserFrosting\Fortress\RequestSchema\RequestSchemaRepository;
+use UserFrosting\Fortress\RequestDataTransformer;
 use UserFrosting\Fortress\ServerSideValidator;
 use UserFrosting\Sprinkle\Core\Controller\SimpleController;
-use UserFrosting\Sprinkle\Core\Util\EnvironmentInfo;
-use UserFrosting\Sprinkle\FormGenerator\Form;
-use UserFrosting\Sprinkle\UserProfile\Util\UserProfileHelper;
 use UserFrosting\Support\Exception\ForbiddenException;
-use UserFrosting\Support\Repository\Loader\YamlFileLoader;
 
 
 

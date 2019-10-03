@@ -16,5 +16,22 @@
                 }
             }
         }
+    },
+    "js/pages/mailing-list": {
+        "scripts": [
+            "CampaignMan/js/pages/mailing-list.js",
+            "CampaignMan/js/widgets/mailing-list.js"
+        ],
+        "options": {
+            "result": {
+                "type": {
+                    "scripts": "plain"
+                }
+            },
+            "sprinkle": {
+                "onCollision": "merge"
+            }
+        }
     }
+}
 }

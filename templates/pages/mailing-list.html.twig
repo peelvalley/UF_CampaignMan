@@ -29,7 +29,7 @@
                 </div>
                 {% if not 'add_subscriber' in wigets.hidden %}
                 <div class="box-footer">
-                    <button type="button" class="btn btn-success js-subscriber-add">
+                    <button type="button" class="btn btn-success js-subscriber-create">
                         <i class="fas fa-plus-square"></i>  {{ translate("SUBSCRIBER.CREATE")}}
                     </button>
                 </div>
@@ -49,6 +49,6 @@
     {{ assets.js('js/form-widgets') | raw }}
 
     <!-- Include page-specific JS -->
-    {{ assets.js('js/pages/mailing-lists') | raw }}
+    {{ assets.js('js/pages/mailing-list') | raw }}
 
 {% endblock %}

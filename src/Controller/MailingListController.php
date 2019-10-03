@@ -45,7 +45,7 @@ class MailingListController extends SimpleController
 
     public function pageInfo(Request $request, Response $response, $args)
     {
-        $mailingList = $this->getMailingListParams($args);
+        $mailingList = $this->getMailingListFromParams($args);
         // If the user no longer exists, forward to main user listing page
         if (!$mailingList) {
             throw new NotFoundException();

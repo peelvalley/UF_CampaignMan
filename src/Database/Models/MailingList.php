@@ -19,9 +19,12 @@ class MailingList extends Model
 
     protected $fillable = [
         'group_id',
+        'name',
+        'slug',
         'description',
         'metadata'
     ];
+
 
     /**
      * @var bool Enable timestamps for this class.

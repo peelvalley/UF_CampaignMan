@@ -17,8 +17,8 @@ class SubscriptionsTable extends Migration
     */
     public function up()
     {
-        if (!$this->schema->hasTable('subscriptions')) {
-            $this->schema->create('subscriptions', function (Blueprint $table) {
+        if (!$this->schema->hasTable('subscriber_subscription')) {
+            $this->schema->create('subscriber_subscription', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('mailing_lists_id')->unsigned();
                 $table->integer('subscriber_id')->unsigned();
@@ -42,8 +42,8 @@ class SubscriptionsTable extends Migration
     */
     public function down()
     {
-        if ($this->schema->hasTable('subscriptions')) {
-            $this->schema->drop('subscriptions');
+        if ($this->schema->hasTable('subscriber_subscription')) {
+            $this->schema->drop('subscriber_subscription');
         }
     }
 }

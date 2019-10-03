@@ -12,7 +12,7 @@ class Subscription extends Model
     /**
      * @var string The name of the table for the current model.
      */
-    protected $table = 'subscriptions';
+    protected $table = 'subscriber_subscription';
 
     protected $fillable = [
         'list_id',

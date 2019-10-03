@@ -1,0 +1,8 @@
+---
+ml_id:
+  validators:
+    integer:
+      label: "&Mailing list ID"
+      message: VALIDATE.INTEGER
+  transformations:
+    - trim

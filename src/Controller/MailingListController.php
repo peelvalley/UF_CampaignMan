@@ -45,7 +45,7 @@ class MailingListController extends SimpleController
 
     public function pageInfo(Request $request, Response $response, $args)
     {
-        $mailingList = $this->getUserFromParams($args);
+        $mailingList = $this->getMailingListParams($args);
         // If the user no longer exists, forward to main user listing page
         if (!$mailingList) {
             throw new NotFoundException();
@@ -128,31 +128,35 @@ class MailingListController extends SimpleController
         ]);
     }
 
-    // public function getModalEditSubscriber(Request $request, Response $response, $args)
-    // {
-    //     // GET parameters
-    //     $params = $request->getQueryParams(); // TODO load existing subscriber for edit
+       protected function getMailingListFromParams($params)
+    {
+        // Load the request schema
+        $schema = new RequestSchema('schema://requests/mailing-list/get-by-id.yaml');
 
-    //     /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
-    //     $authorizer = $this->ci->authorizer;
-    //     /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
-    //     $currentUser = $this->ci->currentUser;
+        // Whitelist and set parameter defaults
+        $transformer = new RequestDataTransformer($schema);
+        $data = $transformer->transform($params);
 
-    //     /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
-    //     $classMapper = $this->ci->classMapper;
+        // Validate, and throw exception on validation errors.
+        $validator = new ServerSideValidator($schema, $this->ci->translator);
+        if (!$validator->validate($data)) {
+            // TODO: encapsulate the communication of error messages from ServerSideValidator to the BadRequestException
+            $e = new BadRequestException();
+            foreach ($validator->errors() as $idx => $field) {
+                foreach($field as $eidx => $error) {
+                    $e->addUserMessage($error);
+                }
+            }
+            throw $e;
+        }
 
-    //     return $this->ci->view->render($response, 'modals/add-subscriber.html.twig', [
-    //         'groups' => $classMapper->staticMethod('group', 'get'),
-    //         'form' => [
-    //             'method' => 'PUT',
-    //             'action' => 'api/subscribers/update',
-    //         ],
-    //         'editable' => TRUE  //TODO add access control
-    //     ]);
-    // }
+        /** @var UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
+        $classMapper = $this->ci->classMapper;
 
-
-
+        // Get the specified event record
+        $mailingList = $classMapper->staticMethod('mailing_list', 'find', $data['ml_id']);
+        return $mailingList;
+    }
 
 }
 

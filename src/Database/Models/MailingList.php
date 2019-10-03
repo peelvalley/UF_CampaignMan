@@ -42,7 +42,7 @@ class MailingList extends Model
         /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
         $classMapper = static::$ci->classMapper;
 
-        return $this->belongsToManyThrough($classMapper->getClassMapping('subscriptions'), $classMapper->getClassMapping('subscribers'));
+        return $this->belongsToManyThrough($classMapper->getClassMapping('subscribers'), $classMapper->getClassMapping('subscription'));
     }
 
     public function group()

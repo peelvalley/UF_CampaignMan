@@ -20,14 +20,14 @@ class SubscriptionsTable extends Migration
         if (!$this->schema->hasTable('subscriber_subscription')) {
             $this->schema->create('subscriber_subscription', function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('mailing_lists_id')->unsigned();
+                $table->integer('mailing_list_id')->unsigned();
                 $table->integer('subscriber_id')->unsigned();
                 $table->boolean('enabled')->default(TRUE);
 
                 $table->timestamps();
                 $table->index('enabled');
 
-                $table->foreign('mailing_lists_id')->references('id')->on('mailing_lists')->onDelete('cascade')->onUpdate('cascade');
+                $table->foreign('mailing_list_id')->references('id')->on('mailing_lists')->onDelete('cascade')->onUpdate('cascade');
                 $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('cascade')->onUpdate('cascade');
 
                 $table->engine = 'InnoDB';

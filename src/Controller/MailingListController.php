@@ -47,6 +47,9 @@ class MailingListController extends SimpleController
             throw new NotFoundException();
         }
 
+        // GET parameters
+         $params = $request->getQueryParams();
+
         /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
         $authorizer = $this->ci->authorizer;
         /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */

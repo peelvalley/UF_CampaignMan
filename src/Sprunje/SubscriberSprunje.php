@@ -35,7 +35,7 @@ class SubscriberSprunje extends Sprunje
      */
     protected function baseQuery()
     {
-        throw new \Exception(print_r([$this], TRUE));
+        throw new \Exception(print_r([$this->$classMapper], TRUE));
         return $this->$classMapper->getClassMapping('subscriber');
     }
 }

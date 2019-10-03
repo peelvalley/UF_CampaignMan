@@ -87,7 +87,7 @@ class MailingListController extends SimpleController
             $widgets['hidden'][] = 'add_subscriber';
         }
         return $this->ci->view->render($response, 'pages/mailing-list.html.twig', [
-            'user'            => $user,
+            'mailing_list'    => $mailingList,
             'tools'           => $editButtons,
             'widgets'         => $widgets
         ]);

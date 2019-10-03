@@ -38,7 +38,7 @@ class Subscriber extends Model
         /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
         $classMapper = static::$ci->classMapper;
 
-        return $this->belongsToManyThrough($classMapper->getClassMapping('mailing_list'), $classMapper->getClassMapping('list_sub'));
+        return $this->belongsToManyThrough($classMapper->getClassMapping('mailing_list'), $classMapper->getClassMapping('subscriptions'));
     }
 
 

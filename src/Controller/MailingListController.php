@@ -46,7 +46,7 @@ class MailingListController extends SimpleController
         $mailingList = $this->getMailingListFromParams($args);
         // If the user no longer exists, forward to main user listing page
         if (!$mailingList) {
-            throw new NotFoundException();
+            throw new NotFoundException($request, $response);
         }
 
         // GET parameters
@@ -77,7 +77,7 @@ class MailingListController extends SimpleController
         $mailingList = $this->getMailingListFromParams($args);
         // If the user no longer exists, forward to main user listing page
         if (!$mailingList) {
-            throw new NotFoundException();
+            throw new NotFoundException($request, $response);
         }
         /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
         $authorizer = $this->ci->authorizer;
@@ -147,7 +147,7 @@ class MailingListController extends SimpleController
         $mailingList = $this->getMailingListFromParams($args);
         // If the user no longer exists, forward to main user listing page
         if (!$mailingList) {
-            throw new NotFoundException();
+            throw new NotFoundException($request, $response);
         }
 
         /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */

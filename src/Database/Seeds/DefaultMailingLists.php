@@ -18,6 +18,8 @@ class DefaultMailingLists extends BaseSeed
     {
        foreach (Group::doesnthave('mailingLists')->get() as $group) {
             $group->mailingLists()->save( new MailingList([
+                'name' => 'Default',
+                'slug' => 'default',
                 'description' => 'Default mailing list'
             ]));
        }

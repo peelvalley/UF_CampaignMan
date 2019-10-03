@@ -16,7 +16,7 @@ use UserFrosting\Sprinkle\Core\Sprunje\Sprunje;
  */
 class SubscriberSprunje extends Sprunje
 {
-    protected $name = 'mailing_lists';
+    protected $name = 'subscribers';
 
     protected $listable = [];
 

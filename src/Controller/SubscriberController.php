@@ -30,7 +30,7 @@ class SubscriberController extends SimpleController
         /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
         $classMapper = $this->ci->classMapper;
 
-        return $this->ci->view->render($response, 'modals/subscriber.html.twig', [
+        return $this->ci->view->render($response, 'CampaignMan/modals/subscriber.html.twig', [
             'groups' => $classMapper->staticMethod('group', 'where', 'slug', '!=', 'default')->get(),
             'form' => [
                 'method' => 'POST',
@@ -53,7 +53,7 @@ class SubscriberController extends SimpleController
     //     /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
     //     $classMapper = $this->ci->classMapper;
 
-    //     return $this->ci->view->render($response, 'modals/add-subscriber.html.twig', [
+    //     return $this->ci->view->render($response, 'CampaignMan/modals/add-subscriber.html.twig', [
     //         'groups' => $classMapper->staticMethod('group', 'get'),
     //         'form' => [
     //             'method' => 'PUT',

@@ -38,7 +38,7 @@ class GroupMailingController extends GroupController
             ])) {
             throw new ForbiddenException();
         }
-        return $this->ci->view->render($response, 'pages/group-mailing-lists.html.twig', [
+        return $this->ci->view->render($response, 'CampaignMan/pages/group-mailing-lists.html.twig', [
             'group' => $group
         ]);
     }

@@ -119,7 +119,7 @@ class MailingListController extends SimpleController
         ])) {
             $widgets['hidden'][] = 'add_subscriber';
         }
-        return $this->ci->view->render($response, 'pages/mailing-list.html.twig', [
+        return $this->ci->view->render($response, 'CampaignMan/pages/mailing-list.html.twig', [
             'mailing_list'    => $mailingList,
             'tools'           => $editButtons,
             'widgets'         => $widgets
@@ -136,7 +136,7 @@ class MailingListController extends SimpleController
         if (!$authorizer->checkAccess($currentUser, 'view_mailing_lists')) {
             throw new ForbiddenException();
         }
-        return $this->ci->view->render($response, 'pages/mailing-lists.html.twig', [
+        return $this->ci->view->render($response, 'CampaignMan/pages/mailing-lists.html.twig', [
 
         ]);
     }
@@ -153,7 +153,7 @@ class MailingListController extends SimpleController
         /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
         $classMapper = $this->ci->classMapper;
 
-        return $this->ci->view->render($response, 'modals/add-subscriber.html.twig', [
+        return $this->ci->view->render($response, 'CampaignMan/modals/add-subscriber.html.twig', [
             'groups' => $classMapper->staticMethod('group', 'where', 'slug', '!=', 'default')->get(),
             'mailing_list' => $mailingList,
             'form' => [

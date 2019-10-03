@@ -12,7 +12,7 @@ class CampaignSub extends Model
     /**
      * @var string The name of the table for the current model.
      */
-    protected $table = 'list_subs';
+    protected $table = 'campaign_subs';
 
     protected $fillable = [
         'campaign_id',

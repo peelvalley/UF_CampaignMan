@@ -18,7 +18,9 @@ class SubscriberSprunje extends Sprunje
 {
     protected $name = 'subscribers';
 
-    protected $listable = [];
+    protected $listable = [
+        'email'
+    ];
 
     protected $sortable = [
         'email'

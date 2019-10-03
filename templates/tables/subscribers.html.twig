@@ -11,10 +11,7 @@
     <table id="{{table.id}}" class="tablesorter table table-bordered table-hover table-striped" data-sortlist="{{table.sortlist}}">
         <thead>
             <tr>
-                <th data-column-name="description" data-sorter="false" data-filter="false"  data-column-template="#ml-table-column-description" data-priority="1">Description</th>
-                {% if 'group' in table.columns %}
-                <th class="sorter-metatext" data-column-name="group_name" data-column-template="#ml-table-column-group" data-value="{{table.filters.group}}" data-priority="4">Group <i class="fas fa-sort"></i></th>
-                {% endif %}
+                <th data-column-name="email" data-sorter="false" data-filter="false"  data-column-template="#ml-table-column-email" data-priority="1">Description</th>
                 <th data-column-name="actions" data-column-template="#ml-table-column-actions" data-sorter="false" data-filter="false" data-priority="1">{{translate("ACTIONS")}}</th>
             </tr>
         </thead>
@@ -32,15 +29,8 @@
     #}
     {% verbatim %}
     <script id="ml-table-column-description" type="text/x-handlebars-template">
-        <td data-text="{{row.description}}">
-            <strong>
-                <a href="{{site.uri.public}}/mailing_lists/ml/{{row.id}}">{{row.description}}</a>
-            </strong>
-        </td>
-    </script>
-    <script id="ml-table-column-group" type="text/x-handlebars-template">
-        <td data-text="{{row.group_name}}">
-            <span>{{row.group_name}}</span>
+        <td data-text="{{row.email}}">
+           <span>{{row.email}}</span>
         </td>
     </script>
     <script id="ml-table-column-actions" type="text/x-handlebars-template">

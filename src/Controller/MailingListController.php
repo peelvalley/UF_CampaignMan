@@ -39,6 +39,33 @@ class MailingListController extends SimpleController
         return $sprunje->toResponse($response);
     }
 
+    public function getSubscribers(Request $request, Response $response, $args)
+    {
+        $mailingList = $this->getMailingListFromParams($args);
+        // If the user no longer exists, forward to main user listing page
+        if (!$mailingList) {
+            throw new NotFoundException();
+        }
+
+        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
+        $authorizer = $this->ci->authorizer;
+        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
+        $currentUser = $this->ci->currentUser;
+        // Access-controlled page
+        if (!$authorizer->checkAccess($currentUser, 'view_list_subscribers', [
+            'mailing_list' => $mailingList,
+            'group' => $mailingList->group
+        ])) {
+            throw new ForbiddenException();
+        }
+        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
+        $classMapper = $this->ci->classMapper;
+        $sprunje = $classMapper->createInstance('subscriber_sprunje', $classMapper, $params);
+        // Be careful how you consume this data - it has not been escaped and contains untrusted user-supplied content.
+        // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
+        return $sprunje->toResponse($response);
+    }
+
     public function pageInfo(Request $request, Response $response, $args)
     {
         $mailingList = $this->getMailingListFromParams($args);
@@ -51,7 +78,7 @@ class MailingListController extends SimpleController
         /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
         $currentUser = $this->ci->currentUser;
         // Access-controlled page
-        if (!$authorizer->checkAccess($currentUser, 'view_mailinglist', [
+        if (!$authorizer->checkAccess($currentUser, 'view_mailing_list', [
             'mailing_list' => $mailingList,
             'group' => $mailingList->group
         ])) {
@@ -80,7 +107,7 @@ class MailingListController extends SimpleController
         $widgets = [
             'hidden' => [],
         ];
-        if (!$authorizer->checkAccess($currentUser, 'add_subscriber', [
+        if (!$authorizer->checkAccess($currentUser, 'create_subscription', [
             'mailing_list' => $mailingList,
             'group' => $mailingList->group
         ])) {
@@ -111,14 +138,21 @@ class MailingListController extends SimpleController
 
     public function getModalAddSubscriber(Request $request, Response $response, $args)
     {
+        $mailingList = $this->getMailingListFromParams($args);
+        // If the user no longer exists, forward to main user listing page
+        if (!$mailingList) {
+            throw new NotFoundException();
+        }
+
         /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
         $classMapper = $this->ci->classMapper;
 
         return $this->ci->view->render($response, 'modals/add-subscriber.html.twig', [
             'groups' => $classMapper->staticMethod('group', 'where', 'slug', '!=', 'default')->get(),
+            'mailing_list' => $mailingList,
             'form' => [
                 'method' => 'POST',
-                'action' => 'api/mailing_lists/add-subscriber',
+                'action' => 'api/subscriptions/create',
             ],
             'editable' => TRUE
         ]);

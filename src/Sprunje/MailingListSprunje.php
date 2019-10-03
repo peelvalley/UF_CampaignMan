@@ -22,10 +22,12 @@ class MailingListSprunje extends Sprunje
 
     protected $sortable = [
         'description',
+        'name',
         'group_name'
     ];
 
     protected $filterable = [
+        'name',
         'group_name'
     ];
 
@@ -34,6 +36,6 @@ class MailingListSprunje extends Sprunje
      */
     protected function baseQuery()
     {
-        return $this->classMapper->createInstance('mailing_list');
+        return $this->classMapper->getClassMapping('mailing_list');
     }
 }

@@ -48,7 +48,7 @@ class MailingListController extends SimpleController
         }
 
         // GET parameters
-         $params = $request->getQueryParams();
+        $params = $request->getQueryParams();
 
         /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
         $authorizer = $this->ci->authorizer;
@@ -66,6 +66,7 @@ class MailingListController extends SimpleController
         $sprunje = $classMapper->createInstance('subscriber_sprunje', $classMapper, $params);
         // Be careful how you consume this data - it has not been escaped and contains untrusted user-supplied content.
         // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
+        $sprunje->setQuery($mailingList->subscribers());
         return $sprunje->toResponse($response);
     }
 

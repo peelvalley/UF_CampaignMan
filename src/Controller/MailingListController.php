@@ -43,6 +43,60 @@ class MailingListController extends SimpleController
         return $sprunje->toResponse($response);
     }
 
+    public function pageInfo(Request $request, Response $response, $args)
+    {
+        $mailingList = $this->getUserFromParams($args);
+        // If the user no longer exists, forward to main user listing page
+        if (!$mailingList) {
+            throw new NotFoundException();
+        }
+        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
+        $authorizer = $this->ci->authorizer;
+        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
+        $currentUser = $this->ci->currentUser;
+        // Access-controlled page
+        if (!$authorizer->checkAccess($currentUser, 'view_mailinglist', [
+            'mailing_list' => $mailingList,
+            'group' => $mailingList->group
+        ])) {
+            throw new ForbiddenException();
+        }
+
+        // Determine buttons to display
+        $editButtons = [
+            'hidden' => [],
+        ];
+        if (!$authorizer->checkAccess($currentUser, 'update_mailing_list_field', [
+            'mailing_list' => $mailingList,
+            'group' => $mailingList->group,
+            'fields' => ['description']
+        ])) {
+            $editButtons['hidden'][] = 'edit';
+        }
+
+        if (!$authorizer->checkAccess($currentUser, 'delete_mailing_list', [
+            'mailing_list' => $mailingList,
+            'group' => $mailingList->group
+        ])) {
+            $editButtons['hidden'][] = 'delete';
+        }
+
+        $widgets = [
+            'hidden' => [],
+        ];
+        if (!$authorizer->checkAccess($currentUser, 'add_subscriber', [
+            'mailing_list' => $mailingList,
+            'group' => $mailingList->group
+        ])) {
+            $widgets['hidden'][] = 'add_subscriber';
+        }
+        return $this->ci->view->render($response, 'pages/user.html.twig', [
+            'user'            => $user,
+            'tools'           => $editButtons,
+            'widgets'         => $widgets
+        ]);
+    }
+
     public function pageList(Request $request, Response $response, $args)
     {
         /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */

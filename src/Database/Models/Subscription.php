@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use UserFrosting\Sprinkle\Core\Database\Models\Model;
 
 
-class ListSub extends Model
+class Subscription extends Model
 {
     /**
      * @var string The name of the table for the current model.

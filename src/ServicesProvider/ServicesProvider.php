@@ -20,7 +20,7 @@ class ServicesProvider
             $classMapper->setClassMapping('group', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\Group');
             $classMapper->setClassMapping('campaign', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\Campaign');
             $classMapper->setClassMapping('campaign_sub', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\CampaignSub');
-            $classMapper->setClassMapping('list_sub', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\ListSub');
+            $classMapper->setClassMapping('subscription', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\Subscription');
             $classMapper->setClassMapping('mailing_list', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\MailingList');
             $classMapper->setClassMapping('subscriber', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\Subscriber');
             $classMapper->setClassMapping('sub_verification', 'UserFrosting\Sprinkle\CampaignMan\Database\Models\SubscriberVerification');

@@ -20,6 +20,7 @@ class MailingQueue extends Model
         'from',
         'data',
         'metadata',
+        'metadata->error',
         'attachments'
     ];
 

@@ -42,7 +42,7 @@ class ProcessMailQueue extends BaseCommand
 
         $queueCount = $classMapper->staticMethod('mailing_queue','count');
 
-        while ($mailItem = $classMapper->staticMethod('mailing_queue','first')) {
+        while ($mailItem = $classMapper->staticMethod('mailing_queue','where', 'metadata->status', '!=', 'error')->first()) {
             $remaining = $classMapper->staticMethod('mailing_queue','count');
             $completed = $queueCount - $remaining +1;
             $this->io->writeln("Sending item {$completed} of {$queueCount}");
@@ -97,6 +97,7 @@ class ProcessMailQueue extends BaseCommand
 
             } catch (Exception $e) {
                 $this->io->error($e->getMessage());
+                $mailItem->update(['metadata->status' => 'error']);
                 $phpMailer->clearAllRecipients();
             }
             $phpMailer->clearAttachments();

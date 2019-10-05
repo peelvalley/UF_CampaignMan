@@ -8,7 +8,7 @@
 {# Overrides blocks in head of base template #}
 {% block page_title %}{{ translate('MAILING_LIST', 2)}}{% endblock %}
 
-{% block page_description %}{{ translate('MAILING_LISTS.PAGE_DESCRIPTION')}}{% endblock %}
+{% block page_description %}{{ translate('MAILING_LISTS.PAGE_DESCRIPTION', {group: current_user.group})}}{% endblock %}
 
 {% block body_matter %}
     <div class="row">

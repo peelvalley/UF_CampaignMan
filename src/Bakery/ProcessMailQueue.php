@@ -112,7 +112,7 @@ class ProcessMailQueue extends BaseCommand
                     $error = $e;
                 }
             }
-            $this->io->info("Before send");
+            $this->io->writeln("Before send");
             if (!$error) {
                 try {
                     $this->ci->mailer->send($message);

@@ -96,7 +96,7 @@ class ProcessMailQueue extends BaseCommand
                 $this->io->success("Email sent");
 
             } catch (Exception $e) {
-                $this->io->error($e->getMessage());
+                $this->io->error("Unable to send email: {$e->getMessage()});
                 $mailItem->update(['metadata->status' => 'error']);
                 $phpMailer->clearAllRecipients();
             }

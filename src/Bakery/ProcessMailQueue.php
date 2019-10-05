@@ -56,7 +56,19 @@ class ProcessMailQueue extends BaseCommand
                     'name' => $mailItem->from['name']
 
                 ] : $config['address_book.admin']);
-                $message->addEmailRecipient(new EmailRecipient(...$mailItem->to));
+                 } catch (Exception $e) {
+                $error = $e;
+            }
+
+            if (!$error) {
+                try {
+                    $message->addEmailRecipient(new EmailRecipient(...$mailItem->to));
+                } catch (Exception $e) {
+                    $error = $e;
+                }
+            }
+            if (!$error) {
+                try {
                 $message->addParams(
                             array_merge($mailItem->data, ... array_map(function ($paramInfo) use ($classMapper) {
                                     return [
@@ -69,9 +81,10 @@ class ProcessMailQueue extends BaseCommand
                                     ];
                                 }, $mailItem->data['params']) ?? []
                             )
-                        );
-            } catch (Exception $e) {
-                $error = $e;
+                            );
+                } catch (Exception $e) {
+                    $error = $e;
+                }
             }
             if (!$error) {
                 try {

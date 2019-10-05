@@ -43,6 +43,7 @@ class ProcessMailQueue extends BaseCommand
         $queueCount = $classMapper->staticMethod('mailing_queue','count');
 
         while ($mailItem = $classMapper->getClassMapping('mailing_queue')::whereNull('metadata->status')->orWhere('metadata->status', '!=', 'error')->first()) {
+            $error = NULL;
             $remaining = $classMapper->staticMethod('mailing_queue','count');
             $completed = $queueCount - $remaining +1;
             $this->io->writeln("Sending item {$completed} of {$queueCount}");
@@ -68,8 +69,12 @@ class ProcessMailQueue extends BaseCommand
                                     ];
                                 }, $mailItem->data['params']) ?? []
                             )
-                        );
+            //             );
+            //     } catch (Exception $e) {
+            //         $error = $e;
+            //     }
 
+            // try {
                 foreach ($mailItem->attachments as $attachment) {
                     if ($attachment['type'] == 'pdf') {
                         $pdf = $this->generatePDF($attachment['template'],
@@ -96,11 +101,18 @@ class ProcessMailQueue extends BaseCommand
                 $this->io->success("Email sent");
 
             } catch (Exception $e) {
+                $error = $e;
+            }
+            if ($error) {
                 $this->io->error("Unable to send email: {$e->getMessage()}");
                 $mailItem->update(['metadata->status' => 'error']);
+                $mailItem->update(['metadata->error' => 'error']);
+                $$mailItem->save();
                 $phpMailer->clearAllRecipients();
             }
+
             $phpMailer->clearAttachments();
+
         }
     }
     private function generatePDF($template, $params=[])

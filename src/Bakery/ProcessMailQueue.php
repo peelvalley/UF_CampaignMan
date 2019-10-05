@@ -55,9 +55,9 @@ class ProcessMailQueue extends BaseCommand
                     'email' => $mailItem->from['email'],
                     'name' => $mailItem->from['name']
 
-                ] : $config['address_book.admin'])
-                        ->addEmailRecipient(new EmailRecipient(...$mailItem->to))
-                        ->addParams(
+                ] : $config['address_book.admin']);
+                $message->addEmailRecipient(new EmailRecipient(...$mailItem->to));
+                $message->addParams(
                             array_merge($mailItem->data, ... array_map(function ($paramInfo) use ($classMapper) {
                                     return [
                                         $paramInfo['paramName'] => call_user_func_array(
@@ -70,38 +70,39 @@ class ProcessMailQueue extends BaseCommand
                                 }, $mailItem->data['params']) ?? []
                             )
                         );
-            //     } catch (Exception $e) {
-            //         $error = $e;
-            //     }
-
-            // try {
-                foreach ($mailItem->attachments as $attachment) {
-                    if ($attachment['type'] == 'pdf') {
-                        $pdf = $this->generatePDF($attachment['template'],
-                            array_merge($attachment['data'] ?? [], ... array_map(function ($paramInfo) use ($classMapper) {
-                                return [
-                                    $paramInfo['paramName'] => call_user_func_array(
-                                        array(
-                                            $classMapper,
-                                            $paramInfo['function']),
-                                        $paramInfo['functionParams']
-                                        )
-                                    ];
-                                }, $attachment['params']) ?? []
-                            )
-                        );
-                        $phpMailer->addStringAttachment($pdf->output(NULL, 'S'), $attachment['filename']);
-                    } else {
-                        throw new Exception("{$attachment['type']} not implemented");
-                    }
-                }
-
-                $this->ci->mailer->send($message);
-                $mailItem->delete();
-                $this->io->success("Email sent");
-
             } catch (Exception $e) {
                 $error = $e;
+            }
+            if (!$error) {
+                try {
+                    foreach ($mailItem->attachments as $attachment) {
+                        if ($attachment['type'] == 'pdf') {
+                            $pdf = $this->generatePDF($attachment['template'],
+                                array_merge($attachment['data'] ?? [], ... array_map(function ($paramInfo) use ($classMapper) {
+                                    return [
+                                        $paramInfo['paramName'] => call_user_func_array(
+                                            array(
+                                                $classMapper,
+                                                $paramInfo['function']),
+                                            $paramInfo['functionParams']
+                                            )
+                                        ];
+                                    }, $attachment['params']) ?? []
+                                )
+                            );
+                            $phpMailer->addStringAttachment($pdf->output(NULL, 'S'), $attachment['filename']);
+                        } else {
+                            throw new Exception("{$attachment['type']} not implemented");
+                        }
+                    }
+
+                    $this->ci->mailer->send($message);
+                    $mailItem->delete();
+                    $this->io->success("Email sent");
+
+                } catch (Exception $e) {
+                    $error = $e;
+                }
             }
             if ($error) {
                 $this->io->error("Unable to send email: {$e->getMessage()}");

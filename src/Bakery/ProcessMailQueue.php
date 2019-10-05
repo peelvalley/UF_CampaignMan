@@ -69,7 +69,7 @@ class ProcessMailQueue extends BaseCommand
                                     ];
                                 }, $mailItem->data['params']) ?? []
                             )
-            //             );
+                        );
             //     } catch (Exception $e) {
             //         $error = $e;
             //     }

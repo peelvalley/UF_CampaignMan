@@ -51,12 +51,12 @@ class ProcessMailQueue extends BaseCommand
 
             try {
                 // Create and send email
-                $message = new TwigMailMessage($this->ci->view, $mailItem->template);
-                $message->from($mailItem->from ? [
-                    'email' => $mailItem->from['email'],
-                    'name' => $mailItem->from['name']
+                $message = (new TwigMailMessage($this->ci->view, $mailItem->template))
+                        ->from($mailItem->from ? [
+                            'email' => $mailItem->from['email'],
+                            'name' => $mailItem->from['name']
 
-                ] : $config['address_book.admin'])
+                        ] : $config['address_book.admin'])
                         ->addEmailRecipient(new EmailRecipient(...$mailItem->to))
                         ->addParams(
                             array_merge($mailItem->data, ... array_map(function ($paramInfo) use ($classMapper) {

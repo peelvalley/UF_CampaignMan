@@ -124,7 +124,7 @@ class ProcessMailQueue extends BaseCommand
                 }
             }
 
-            $this->io->writeln(print_r($phpMailer, TRUE));
+            $this->io->writeln('$phpMailer:' . print_r($phpMailer, TRUE));
 
             if ($phpMailer->error) {
                 $error = $phpMailer->error;

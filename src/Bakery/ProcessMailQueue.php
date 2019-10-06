@@ -38,8 +38,8 @@ class ProcessMailQueue extends BaseCommand
         /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
         $classMapper = $this->ci->classMapper;
 
-        $phpMailer = $this->ci->mailer->getPhpMailer();
-
+        $mailer = $this->ci->mailer;
+        $phpMailer = $mailer->getPhpMailer();
         $queueCount = $classMapper->staticMethod('mailing_queue','count');
 
         while ($mailItem = $classMapper->getClassMapping('mailing_queue')::whereNull('metadata->status')->orWhere('metadata->status', '!=', 'error')->first()) {
@@ -49,15 +49,13 @@ class ProcessMailQueue extends BaseCommand
 
             try {
                 // Create and send email
-                $recipient = new EmailRecipient(...$mailItem->to);
-                $this->io->writeln(print_r($recipient, TRUE));
                 $message = (new TwigMailMessage($this->ci->view, $mailItem->template))
                         ->from($mailItem->from ? [
                             'email' => $mailItem->from['email'],
                             'name' => $mailItem->from['name']
 
                         ] : $config['address_book.admin'])
-                        ->addEmailRecipient($recipient)
+                        ->addEmailRecipient(new EmailRecipient(...$mailItem->to))
                         ->addParams(
                             array_merge($mailItem->data, ... array_map(function ($paramInfo) use ($classMapper) {
                                     return [
@@ -93,7 +91,7 @@ class ProcessMailQueue extends BaseCommand
                     }
                 }
 
-                if(!$phpMailer->send($message)) {
+                if(!$mailer->send($message)) {
                     if ($phpMailer->ErrorInfo ) {
                         $error = $phpMailer->ErrorInfo;
                         $phpMailer->ErrorInfo = "";

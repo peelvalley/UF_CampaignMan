@@ -47,7 +47,7 @@ class ProcessMailQueue extends BaseCommand
             $completed = $queueCount - $remaining +1;
             $this->io->writeln("Sending item {$completed} of {$queueCount}");
 
-            // try {
+            try {
                 // Create and send email
                 $message = (new TwigMailMessage($this->ci->view, $mailItem->template))
                         ->from($mailItem->from ? [
@@ -91,22 +91,17 @@ class ProcessMailQueue extends BaseCommand
                     }
                 }
 
-                if(!$mailer->send($message)) {
-                    //throw new \Exception($phpMailer->ErrorInfo);
-                }
-
-
-
+                $mailer->send($message);
                 $mailItem->delete();
                 $this->io->success("Email sent");
 
-            // } catch (\Exception $error) {
-            //     $this->io->error("Unable to send email: {$error->getMessage()}");
-            //     $mailItem->update(['metadata->status' => 'error']);
-            //     $mailItem->update(['metadata->error' => $error->getMessage()]);
-            //     $mailItem->save();
-            //     $phpMailer->clearAllRecipients();
-            // }
+            } catch (\Exception $error) {
+                $this->io->error("Unable to send email: {$error->getMessage()}");
+                $mailItem->update(['metadata->status' => 'error']);
+                $mailItem->update(['metadata->error' => $error->getMessage()]);
+                $mailItem->save();
+                $phpMailer->clearAllRecipients();
+            }
 
             $phpMailer->clearAttachments();
 

@@ -123,6 +123,11 @@ class ProcessMailQueue extends BaseCommand
                     $error = $e;
                 }
             }
+
+            if ( $phpMailer->error) {
+                $error = $phpMailer->error;
+            }
+
             if ($error) {
                 $this->io->error("Unable to send email: {$error->getMessage()}");
                 $mailItem->update(['metadata->status' => 'error']);

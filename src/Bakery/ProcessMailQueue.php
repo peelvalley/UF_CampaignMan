@@ -109,7 +109,6 @@ class ProcessMailQueue extends BaseCommand
                 $mailItem->update(['metadata->status' => 'error']);
                 $mailItem->update(['metadata->error' => $error->getMessage()]);
                 $mailItem->save();
-                $this->io->writeln("Debug:" . print_r( $mailItem->metadata, TRUE));
                 $phpMailer->clearAllRecipients();
             }
 

@@ -46,6 +46,8 @@ class ProcessMailQueue extends BaseCommand
             $remaining = $classMapper->staticMethod('mailing_queue','count');
             $completed = $queueCount - $remaining +1;
             $this->io->writeln("Sending item {$completed} of {$queueCount}");
+            $this->io->writeln(print_r($mailItem->to, TRUE));
+
 
             try {
                 // Create and send email

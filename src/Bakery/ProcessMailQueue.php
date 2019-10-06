@@ -56,7 +56,7 @@ class ProcessMailQueue extends BaseCommand
                     'name' => $mailItem->from['name']
 
                 ] : $config['address_book.admin']);
-                        ->addEmailRecipient(new EmailRecipient(...$mailItem->to));
+                        ->addEmailRecipient(new EmailRecipient(...$mailItem->to))
                         ->addParams(
                             array_merge($mailItem->data, ... array_map(function ($paramInfo) use ($classMapper) {
                                     return [

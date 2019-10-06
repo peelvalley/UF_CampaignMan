@@ -49,13 +49,15 @@ class ProcessMailQueue extends BaseCommand
 
             try {
                 // Create and send email
+                $recipient = new EmailRecipient(...$mailItem->to);
+                $this->io->writeln(print_r($recipient, TRUE));
                 $message = (new TwigMailMessage($this->ci->view, $mailItem->template))
                         ->from($mailItem->from ? [
                             'email' => $mailItem->from['email'],
                             'name' => $mailItem->from['name']
 
                         ] : $config['address_book.admin'])
-                        ->addEmailRecipient(new EmailRecipient(...$mailItem->to))
+                        ->addEmailRecipient($recipient)
                         ->addParams(
                             array_merge($mailItem->data, ... array_map(function ($paramInfo) use ($classMapper) {
                                     return [
@@ -69,7 +71,6 @@ class ProcessMailQueue extends BaseCommand
                                 }, $mailItem->data['params']) ?? []
                             )
                     );
-                    $this->io->writeln(print_r($message, TRUE));
 
                 foreach ($mailItem->attachments as $attachment) {
                     if ($attachment['type'] == 'pdf') {

@@ -91,7 +91,9 @@ class ProcessMailQueue extends BaseCommand
                         throw new \Exception("{$attachment['type']} not implemented");
                     }
                 }
-                $this->ci->mailer->send($message);
+                if ($phpMailer->ErrorInfo) {
+                    throw new \Exception($phpMailer->ErrorInfo);
+                }
                 $mailItem->delete();
                 $this->io->success("Email sent");
 

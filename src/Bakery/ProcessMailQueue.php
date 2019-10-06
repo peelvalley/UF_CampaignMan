@@ -43,7 +43,6 @@ class ProcessMailQueue extends BaseCommand
         $queueCount = $classMapper->staticMethod('mailing_queue','count');
 
         while ($mailItem = $classMapper->getClassMapping('mailing_queue')::whereNull('metadata->status')->orWhere('metadata->status', '!=', 'error')->first()) {
-            $error = NULL;
             $remaining = $classMapper->staticMethod('mailing_queue','count');
             $completed = $queueCount - $remaining +1;
             $this->io->writeln("Sending item {$completed} of {$queueCount}");

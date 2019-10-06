@@ -94,8 +94,9 @@ class ProcessMailQueue extends BaseCommand
 
                 if(!$phpMailer->send($message)) {
                     if ($phpMailer->ErrorInfo ) {
-                        throw new \Exception($phpMailer->ErrorInfo);
+                        $error = $phpMailer->ErrorInfo;
                         $phpMailer->ErrorInfo = "";
+                        throw new \Exception($error);
                     }
                 }
 

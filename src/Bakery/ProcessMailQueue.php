@@ -56,14 +56,14 @@ class ProcessMailQueue extends BaseCommand
                     'name' => $mailItem->from['name']
 
                 ] : $config['address_book.admin']);
-                 } catch (Exception $e) {
+                 } catch (\Exception $e) {
                 $error = $e;
             }
 
             if (!$error) {
                 try {
                     $message->addEmailRecipient(new EmailRecipient(...$mailItem->to));
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     $error = $e;
                 }
             }
@@ -82,7 +82,7 @@ class ProcessMailQueue extends BaseCommand
                                 }, $mailItem->data['params']) ?? []
                             )
                             );
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     $error = $e;
                 }
             }
@@ -105,10 +105,10 @@ class ProcessMailQueue extends BaseCommand
                             );
                             $phpMailer->addStringAttachment($pdf->output(NULL, 'S'), $attachment['filename']);
                         } else {
-                            throw new Exception("{$attachment['type']} not implemented");
+                            throw new \Exception("{$attachment['type']} not implemented");
                         }
                     }
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     $error = $e;
                 }
             }
@@ -119,12 +119,11 @@ class ProcessMailQueue extends BaseCommand
                     $mailItem->delete();
                     $this->io->success("Email sent");
 
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     $error = $e;
                 }
             }
 
-            $this->io->writeln('$phpMailer:' . print_r($phpMailer, TRUE));
 
             if ($phpMailer->error) {
                 $error = $phpMailer->error;

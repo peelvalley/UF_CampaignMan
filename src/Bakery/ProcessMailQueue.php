@@ -92,14 +92,14 @@ class ProcessMailQueue extends BaseCommand
                     }
                 }
 
-                if(!$phpMailer->send($message) {
+                if(!$phpMailer->send($message)) {
                     if ($phpMailer->ErrorInfo ) {
                         throw new \Exception($phpMailer->ErrorInfo );
                         $phpMailer->ErrorInfo = "";
                     }
                 }
 
-                
+
 
                 $mailItem->delete();
                 $this->io->success("Email sent");

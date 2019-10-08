@@ -51,8 +51,8 @@ class MailingQueueSprunje extends Sprunje
         $values = explode($this->orSeparator, $value);
         $query->where(function ($query) use ($values) {
             foreach ($values as $value) {
-                $query->orLike('`to`->> "$[0]"', $value)
-                    ->orLike('`to` ->> "$[1]"', $value);
+                $query->orLike('to ->> "$[0]"', $value)
+                    ->orLike('to ->> "$[1]"', $value);
             }
         });
         return $this;

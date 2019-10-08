@@ -35,6 +35,6 @@ class MailingQueueSprunje extends Sprunje
      */
     protected function baseQuery()
     {
-        return $this->classMapper->getClassMapping('mailing_queue');
+        return $this->classMapper->createInstance('mailing_queue');
     }
 }

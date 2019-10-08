@@ -41,7 +41,7 @@ class MailingQueueSprunje extends Sprunje
 
     protected function sortEmail($query, $direction)
     {
-        $query->orderBy('to ->> "$[0]"', $direction);
+        $query->orderByRaw('`to` ->> "$[0]"', $direction);
         return $this;
     }
 
@@ -49,10 +49,10 @@ class MailingQueueSprunje extends Sprunje
     {
         // Split value on separator for OR queries
         $values = explode($this->orSeparator, $value);
-        $query->where(function ($query) use ($values) {
+        $query->whereRaw(function ($query) use ($values) {
             foreach ($values as $value) {
-                $query->orLike('to->> "$[0]"', $value)
-                    ->orLike('to ->> "$[1]"', $value);
+                $query->orLikeRaw('`to`->> "$[0]"', $value)
+                    ->orLikeRaw('`to` ->> "$[1]"', $value);
             }
         });
         return $this;

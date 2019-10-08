@@ -49,7 +49,7 @@ class MailingQueueSprunje extends Sprunje
     {
         // Split value on separator for OR queries
         $values = explode($this->orSeparator, $value);
-        $query->whereRaw(function ($query) use ($values) {
+        $query->where(function ($query) use ($values) {
             foreach ($values as $value) {
                 $query->orLikeRaw('`to`->> "$[0]"', $value)
                     ->orLikeRaw('`to` ->> "$[1]"', $value);

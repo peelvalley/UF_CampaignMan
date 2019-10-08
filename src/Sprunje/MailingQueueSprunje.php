@@ -30,6 +30,15 @@ class MailingQueueSprunje extends Sprunje
         'email'
     ];
 
+    protected $appends = [
+        'email'
+    ];
+
+
+    protected function listEmail() {
+        return $this->classMapper->createInstance('mailing_queue')->all('to');
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -37,4 +46,7 @@ class MailingQueueSprunje extends Sprunje
     {
         return $this->classMapper->createInstance('mailing_queue');
     }
+
+
+
 }

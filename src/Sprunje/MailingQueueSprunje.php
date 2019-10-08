@@ -36,7 +36,12 @@ class MailingQueueSprunje extends Sprunje
 
 
     protected function listEmail() {
-        return $this->classMapper->createInstance('mailing_queue')->all('to');
+        return $this->classMapper->createInstance('mailing_queue')->all('to')->map(function($to) {
+            return [
+                'value' => $to[0],
+                'text' => $to[1],
+            ];
+        });
     }
 
     /**
@@ -49,4 +54,16 @@ class MailingQueueSprunje extends Sprunje
 
 
 
+}
+
+
+function map(callable $fn)
+{
+    $result = array();
+
+    foreach ($this as $item) {
+        $result[] = $fn($item);
+    }
+
+    return $result;
 }

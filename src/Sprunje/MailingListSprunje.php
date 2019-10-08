@@ -18,7 +18,9 @@ class MailingListSprunje extends Sprunje
 {
     protected $name = 'mailing_lists';
 
-    protected $listable = [];
+    protected $listable = [
+        'name'
+    ];
 
     protected $sortable = [
         'description',

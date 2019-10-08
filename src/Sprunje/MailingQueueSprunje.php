@@ -30,11 +30,6 @@ class MailingQueueSprunje extends Sprunje
         'email'
     ];
 
-    protected $appends = [
-        'email'
-    ];
-
-
     protected function listEmail() {
         return $this->classMapper->createInstance('mailing_queue')->all('to')->map(function($to) {
             return [
@@ -42,6 +37,25 @@ class MailingQueueSprunje extends Sprunje
                 'text' => $to[1],
             ];
         });
+    }
+
+    protected function sortEmail($query, $direction)
+    {
+        $query->orderBy('`to` ->> "$[0]"', $direction);
+        return $this;
+    }
+
+    protected function filterEmail($query, $value)
+    {
+        // Split value on separator for OR queries
+        $values = explode($this->orSeparator, $value);
+        $query->where(function ($query) use ($values) {
+            foreach ($values as $value) {
+                $query->orLike('`to`->> "$[0]"', $value)
+                    ->orLike('`to` ->> "$[1]"', $value);
+            }
+        });
+        return $this;
     }
 
     /**

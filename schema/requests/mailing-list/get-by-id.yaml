@@ -4,5 +4,8 @@ ml_id:
     integer:
       label: "&Mailing list ID"
       message: VALIDATE.INTEGER
+    required:
+      label: "&Mailing list ID"
+      message: VALIDATE.REQUIRED
   transformations:
     - trim

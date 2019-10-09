@@ -1,0 +1,8 @@
+---
+ml_slug:
+  validators:
+    required:
+      label: "&Mailing list Slug"
+      message: VALIDATE.REQUIRED
+  transformations:
+    - trim

@@ -75,4 +75,32 @@ class GroupMailingController extends GroupController
         $sprunje->setQuery($group->mailingLists());
         return $sprunje->toResponse($response);
     }
+
+    protected function getMailingListFromParams($group, $params)
+    {
+        // Load the request schema
+        $schema = new RequestSchema('schema://requests/mailing-list/get-by-slug.yaml');
+
+        // Whitelist and set parameter defaults
+        $transformer = new RequestDataTransformer($schema);
+        $data = $transformer->transform($params);
+
+        // Validate, and throw exception on validation errors.
+        $validator = new ServerSideValidator($schema, $this->ci->translator);
+        if (!$validator->validate($data)) {
+            // TODO: encapsulate the communication of error messages from ServerSideValidator to the BadRequestException
+            $e = new BadRequestException();
+            foreach ($validator->errors() as $idx => $field) {
+                foreach($field as $eidx => $error) {
+                    $e->addUserMessage($error);
+                }
+            }
+            throw $e;
+        }
+
+        // Get the specified event record
+        $mailingList = $group->mailingLists()->where('slug', $data['ml_slug'])->first();
+        return $mailingList;
+    }
+
 }

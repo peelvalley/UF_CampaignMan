@@ -40,10 +40,6 @@ class MailingQueue extends Model
         'attachments' => 'array'
     ];
 
-    protected $appends = [
-        'email'
-    ];
-
     public function getEmailAttribute() {
         return $this->to[0];
     }

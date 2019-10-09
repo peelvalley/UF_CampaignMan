@@ -11,8 +11,9 @@
     <table id="{{table.id}}" class="tablesorter table table-bordered table-hover table-striped" data-sortlist="{{table.sortlist}}">
         <thead>
             <tr>
-                <th class="sorter-metatext" data-column-name="email" data-column-template="#mq-table-column-email" data-priority="1">Email</th>
-                <th data-column-name="error" data-sorter="false" data-filter="false"  data-column-template="#mq-table-column-errors" data-priority="1">Errors</th>
+                <th class="sorter-metatext" data-column-name="to_email" data-column-template="#mq-table-column-to-email" data-priority="1">To Email</th>
+                <th class="sorter-metatext" data-column-name="to_name" data-column-template="#mq-table-column-to-name" data-priority="1">To Name</th>
+                <th data-column-name="error" data-sorter="false" data-filter="false"  data-column-template="#mq-table-column-errors" data-priority="1">Error</th>
                 <th data-column-name="actions" data-column-template="#mq-table-column-actions" data-sorter="false" data-filter="false" data-priority="1">{{translate("ACTIONS")}}</th>
             </tr>
         </thead>
@@ -29,16 +30,23 @@
      # These templates require handlebars-helpers.js, moment.js
     #}
     {% verbatim %}
-    <script id="mq-table-column-email" type="text/x-handlebars-template">
-        <td data-text="{{row.email}}">
+    <script id="mq-table-column-to-email" type="text/x-handlebars-template">
+        <td data-text="{{row.to_email}}">
             <span>
-               {{row.email}}
+               {{row.to_email}}
+            </span>
+        </td>
+    </script>
+     <script id="mq-table-column-to-name" type="text/x-handlebars-template">
+        <td data-text="{{row.to_name}}">
+            <span>
+               {{row.to_name}}
             </span>
         </td>
     </script>
     <script id="mq-table-column-errors" type="text/x-handlebars-template">
         <td>
-            <pre>{row.metadata.errors}}</pre>
+            <pre>{row.metadata.error}}</pre>
         </td>
     </script>
     <script id="mq-table-column-actions" type="text/x-handlebars-template">

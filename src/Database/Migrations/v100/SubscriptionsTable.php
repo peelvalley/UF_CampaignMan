@@ -23,9 +23,12 @@ class SubscriptionsTable extends Migration
                 $table->integer('mailing_list_id')->unsigned();
                 $table->integer('subscriber_id')->unsigned();
                 $table->boolean('enabled')->default(TRUE);
+                $table->json('data')->nullable();
 
                 $table->timestamps();
                 $table->index('enabled');
+                $table->unique(['mailing_list_id', 'subscriber_id']);
+
 
                 $table->foreign('mailing_list_id')->references('id')->on('mailing_lists')->onDelete('cascade')->onUpdate('cascade');
                 $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('cascade')->onUpdate('cascade');

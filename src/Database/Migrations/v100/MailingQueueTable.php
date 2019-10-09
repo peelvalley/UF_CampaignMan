@@ -22,6 +22,11 @@ class MailingQueueTable extends Migration
                 $table->json('data')->nullable();
                 $table->json('metadata')->nullable();
                 $table->json('attachments')->nullable();
+                $table->string('to_email', 255)->virtualAs('`to` ->> "$.email"');
+                $table->string('to_name', 255)->virtualAs('`to` ->> "$.name"');
+
+                $table->index('to_email');
+                $table->index('to_name');
 
                 $table->timestamps();
 

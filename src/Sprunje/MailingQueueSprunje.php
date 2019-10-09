@@ -18,45 +18,15 @@ class MailingQueueSprunje extends Sprunje
 {
     protected $name = 'mailing_queue';
 
-    protected $listable = [
-        'email'
-    ];
-
     protected $sortable = [
-        'email'
+        'to_email',
+        'to_name'
     ];
 
     protected $filterable = [
-        'email'
+        'to_email',
+        'to_name'
     ];
-
-    protected function listEmail() {
-        return $this->classMapper->createInstance('mailing_queue')->all('to')->map(function($to) {
-            return [
-                'value' => $to[0],
-                'text' => $to[1],
-            ];
-        });
-    }
-
-    protected function sortEmail($query, $direction)
-    {
-        $query->orderByRaw('`to`->>"$[0]")', $direction);
-        return $this;
-    }
-
-    protected function filterEmail($query, $value)
-    {
-        // Split value on separator for OR queries
-        $values = explode($this->orSeparator, $value);
-        foreach ($values as $value) {
-            $query->orWhereRaw('to->>"$[0]"='.$value)
-                ->orWhereRaw('to->>"$[1]"='. $value);
-        }
-        return $this;
-
-        
-    }
 
     /**
      * {@inheritdoc}

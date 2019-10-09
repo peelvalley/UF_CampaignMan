@@ -99,6 +99,10 @@ class ProcessMailQueue extends BaseCommand
                 $this->io->error("Unable to send email: {$error->getMessage()}");
                 $mailItem->update(['metadata->status' => 'error']);
                 $mailItem->update(['metadata->error' => $error->getMessage()]);
+                $mailItem->update(['metadata->line' => $error->getLine()]);
+                $mailItem->update(['metadata->file' => $error->getFile()]);
+                $mailItem->update(['metadata->trace' => $error->getTrace()]);
+
                 $mailItem->save();
                 $phpMailer->clearAllRecipients();
             }

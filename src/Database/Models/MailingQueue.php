@@ -22,6 +22,7 @@ class MailingQueue extends Model
         'metadata',
         'metadata->error',
         'metadata->status',
+        'metadata->trace',
         'attachments'
     ];
 

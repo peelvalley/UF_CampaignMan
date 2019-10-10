@@ -99,7 +99,7 @@ class GroupMailingController extends GroupController
        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms */
        $ms = $this->ci->alerts;
        // Load the request schema
-       $schema = new RequestSchema('schema://requests/subscription/create.yaml');
+       $schema = new RequestSchema('schema://requests/subscriber/create.yaml');
        // Whitelist and set parameter defaults
        $transformer = new RequestDataTransformer($schema);
        $data = $transformer->transform($params);
@@ -111,7 +111,7 @@ class GroupMailingController extends GroupController
            $error = true;
        }
 
-       $subscriptionSchema = new RequestSchema('schema://requests/subscription/data.yaml');
+       $subscriptionSchema = new RequestSchema('schema://requests/subscription/create.yaml');
        // Whitelist and set parameter defaults
        $subscriptionTransformer = new RequestDataTransformer($subscriptionSchema);
        $subscriptionData = $subscriptionTransformer->transform($params);
@@ -141,12 +141,12 @@ class GroupMailingController extends GroupController
         $classMapper = $this->ci->classMapper;
 
         // Begin transaction - DB will be rolled back if an exception occurs
-        Capsule::transaction(function () use ($subscriptionData, $mailingList, $currentUser,  $classMapper) {
+        Capsule::transaction(function () use ($data, $subscriptionData, $mailingList, $currentUser,  $classMapper) {
             $subscriber = $classMapper->getClassMapping('subscriber')::firstOrCreate(['email' => $data['email']]);
             $subscription = $classMapper->getClassMapping('subscription')::firstOrCreate([
                 'mailing_list_id' => $mailingList->id,
                 'subscriber_id' => $subscriber->id
-            ], $subscriptionData);
+            ], ['data' => $subscriptionData]);
 
             // Create activity record
             $this->ci->userActivityLogger->info("User {$currentUser->user_name} created subscription for {$subscriber->email} to {$mailingList->name} mailing list.", [

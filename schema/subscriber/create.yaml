@@ -1,0 +1,7 @@
+---
+email:
+  validators:
+    email:
+    required:
+  transformations:
+    - trim

@@ -111,6 +111,8 @@ class GroupMailingController extends GroupController
            $error = true;
        }
 
+       $ms->addMessage('info', print_r(['params' => $params, 'data' => $data], TRUE));
+
        $subscriptionSchema = new RequestSchema('schema://requests/subscription/data.yaml');
        // Whitelist and set parameter defaults
        $subscriptionTransformer = new RequestDataTransformer($subscriptionSchema);
@@ -140,13 +142,15 @@ class GroupMailingController extends GroupController
         /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
         $classMapper = $this->ci->classMapper;
 
+        $data['data'] = $subscriptionData;
+
         // Begin transaction - DB will be rolled back if an exception occurs
-        Capsule::transaction(function () use ($data, $subscriptionData, $mailingList, $currentUser,  $classMapper) {
+        Capsule::transaction(function () use ($data, $mailingList, $currentUser,  $classMapper) {
             $subscriber = $classMapper->getClassMapping('subscriber')::firstOrCreate(['email' => $data['email']]);
             $subscription = $classMapper->getClassMapping('subscription')::firstOrCreate([
                 'mailing_list_id' => $mailingList->id,
                 'subscriber_id' => $subscriber->id
-            ], ['data' => $subscriptionData]);
+            ], $data);
 
             // Create activity record
             $this->ci->userActivityLogger->info("User {$currentUser->user_name} created subscription for {$subscriber->email} to {$mailingList->name} mailing list.", [

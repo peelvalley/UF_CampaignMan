@@ -10,7 +10,7 @@ $app->group('/groups', function () {
 
 $app->group('/api/groups', function () {
     $this->get('/g/{slug}/mailing_lists', 'UserFrosting\Sprinkle\CampaignMan\Controller\GroupMailingController:getMailingLists');
-    $this->post('/g/{slug}/mailing_lists/ml/{ml_slug}', 'UserFrosting\Sprinkle\CampaignMan\Controller\GroupMailingController:createSubscriber');
+    $this->post('/g/{slug}/mailing_lists/ml/{ml_slug}', 'UserFrosting\Sprinkle\CampaignMan\Controller\GroupMailingController:createSubscribscription');
 })->add('authGuard')->add(new NoCache());
 
 $app->group('/modals/groups', function () {

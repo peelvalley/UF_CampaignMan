@@ -77,6 +77,87 @@ class GroupMailingController extends GroupController
         return $sprunje->toResponse($response);
     }
 
+    public function createSubscription(Request $request, Response $response, $args)
+    {
+        $group = $this->getGroupFromParams($args);
+
+        // If the group no longer exists, return 404
+        if (!$group) {
+            return $response->withStatus(404);
+        }
+
+        $mailingList = $this->getMailingListFromParams($group, $args);
+
+         // If the mailing list no longer exists, return 404
+        if (!$mailingList) {
+            return $response->withStatus(404);
+        }
+
+       // Get POST parameters:
+       $params = $request->getParsedBody();
+
+       /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms */
+       $ms = $this->ci->alerts;
+       // Load the request schema
+       $schema = new RequestSchema('schema://requests/subscription/create.yaml');
+       // Whitelist and set parameter defaults
+       $transformer = new RequestDataTransformer($schema);
+       $data = $transformer->transform($params);
+       $error = false;
+       // Validate request data
+       $validator = new ServerSideValidator($schema, $this->ci->translator);
+       if (!$validator->validate($data)) {
+           $ms->addValidationErrors($validator);
+           $error = true;
+       }
+
+       $subscriptionSchema = new RequestSchema('schema://requests/subscription/data.yaml');
+       // Whitelist and set parameter defaults
+       $subscriptionTransformer = new RequestDataTransformer($subscriptionSchema);
+       $subscriptionData = $subscriptionTransformer->transform($params);
+       // Validate request data
+       $subscriptionValidator = new ServerSideValidator($subscriptionSchema, $this->ci->translator);
+       if (!$subscriptionValidator->validate($subscriptionData)) {
+           $ms->addValidationErrors($subscriptionValidator);
+           $error = true;
+       }
+
+        if ($error) {
+            return $response->withJson([], 400);
+        }
+
+        $authorizer = $this->ci->authorizer;
+        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
+        $currentUser = $this->ci->currentUser;
+
+        // Access-controlled page
+        if (!$authorizer->checkAccess($currentUser, 'create_subscription', [
+            'group' => $group
+        ])) {
+        throw new ForbiddenException();
+        }
+
+        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
+        $classMapper = $this->ci->classMapper;
+
+        // Begin transaction - DB will be rolled back if an exception occurs
+        Capsule::transaction(function () use ($subscriptionData, $mailingList, $currentUser,  $classMapper) {
+            $subscriber = $classMapper->getClassMapping('subscriber')::firstOrCreate(['email' => $data['email']]);
+            $subscription = $classMapper->getClassMapping('subscription')::firstOrCreate([
+                'mailing_list_id' => $mailingList->id,
+                'subscriber_id' => $subscriber->id
+            ], $subscriptionData);
+
+            // Create activity record
+            $this->ci->userActivityLogger->info("User {$currentUser->user_name} created subscription for {$subscriber->email} to {$mailingList->name} mailing list.", [
+                'type'    => 'create_subscription',
+                'user_id' => $currentUser->id,
+            ]);
+        });
+
+        return $response->withJson([], 200);
+    }
+
     public function getModalCreateSubscription(Request $request, Response $response, $args)
     {
         $group = $this->getGroupFromParams($args);

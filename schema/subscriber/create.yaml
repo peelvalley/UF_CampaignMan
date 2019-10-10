@@ -5,3 +5,13 @@ email:
     required:
   transformations:
     - trim
+
+group_id:
+  validators:
+    integer:
+  transformations:
+    - trim
+
+name:
+  transformations:
+    - trim

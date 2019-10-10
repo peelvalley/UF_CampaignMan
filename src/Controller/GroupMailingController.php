@@ -99,7 +99,7 @@ class GroupMailingController extends GroupController
        /** @var \UserFrosting\Sprinkle\Core\Alert\AlertStream $ms */
        $ms = $this->ci->alerts;
        // Load the request schema
-       $schema = new RequestSchema('schema://requests/subscriber/create.yaml');
+       $schema = new RequestSchema('schema://requests/subscription/create.yaml');
        // Whitelist and set parameter defaults
        $transformer = new RequestDataTransformer($schema);
        $data = $transformer->transform($params);
@@ -111,7 +111,7 @@ class GroupMailingController extends GroupController
            $error = true;
        }
 
-       $subscriptionSchema = new RequestSchema('schema://requests/subscription/create.yaml');
+       $subscriptionSchema = new RequestSchema('schema://requests/subscription/data.yaml');
        // Whitelist and set parameter defaults
        $subscriptionTransformer = new RequestDataTransformer($subscriptionSchema);
        $subscriptionData = $subscriptionTransformer->transform($params);

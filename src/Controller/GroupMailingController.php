@@ -2,7 +2,7 @@
 
 namespace UserFrosting\Sprinkle\CampaignMan\Controller;
 
-use Interop\Container\ContainerInterface;
+use Illuminate\Database\Capsule\Manager as Capsule;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Exception\NotFoundException;

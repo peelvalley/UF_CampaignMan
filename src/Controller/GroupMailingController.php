@@ -76,6 +76,45 @@ class GroupMailingController extends GroupController
         return $sprunje->toResponse($response);
     }
 
+    public function getModalCreateSubscription(Request $request, Response $response, $args)
+    {
+        $group = $this->getGroupFromParams($args);
+
+        // If the group no longer exists, return 404
+        if (!$group) {
+            return $response->withStatus(404);
+        }
+
+        $mailingList = $this->getMailingListFromParams($group, $args);
+
+         // If the mailing list no longer exists, return 404
+        if (!$mailingList) {
+            return $response->withStatus(404);
+        }
+
+        $authorizer = $this->ci->authorizer;
+        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
+        $currentUser = $this->ci->currentUser;
+
+        // Access-controlled page
+        if (!$authorizer->checkAccess($currentUser, 'create_subscription', [
+            'group' => $group
+        ])) {
+        throw new ForbiddenException();
+        }
+
+        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
+        $classMapper = $this->ci->classMapper;
+
+        return $this->ci->view->render($response, 'CampaignMan/modals/subscription.html.twig', [
+            'groups' => $classMapper->staticMethod('group', 'where', 'slug', '!=', 'default')->get(),
+            'form' => [
+                'method' => 'POST',
+                'action' => "api/g/{$group->slug}/mailing_lists/ml/{$mailingList->slug}"
+            ]
+        ]);
+    }
+
     protected function getMailingListFromParams($group, $params)
     {
         // Load the request schema

@@ -17,7 +17,10 @@ class Subscription extends Model
     protected $fillable = [
         'mailing_list_id',
         'subscriber_id',
-        'enabled'
+        'enabled',
+        'name',
+        'group_id',
+        'data'
     ];
 
     /**

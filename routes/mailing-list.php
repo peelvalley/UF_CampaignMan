@@ -26,6 +26,8 @@ $app->group('/api/mailing_lists', function () {
 
     $this->get('/ml/{ml_id}/subscribers', 'UserFrosting\Sprinkle\CampaignMan\Controller\MailingListController:getSubscribers');
 
+    $this->get('/ml/{ml_id}/subscriptions', 'UserFrosting\Sprinkle\CampaignMan\Controller\MailingListController:getSubscriptions');
+
     $this->put('/ml/{ml_id}', 'UserFrosting\Sprinkle\CampaignMan\Controller\MailingListController:updateInfo');
 
     $this->put('/ml/{ml_id}/{field}', 'UserFrosting\Sprinkle\CampaignMan\Controller\MailingListController:updateField');

@@ -72,6 +72,41 @@ class MailingListController extends SimpleController
         return $sprunje->toResponse($response);
     }
 
+    public function getSubscriptions(Request $request, Response $response, $args)
+    {
+        $mailingList = $this->getMailingListFromParams($args);
+        // If the user no longer exists, forward to main user listing page
+        if (!$mailingList) {
+            throw new NotFoundException($request, $response);
+        }
+
+        // GET parameters
+        $params = $request->getQueryParams();
+
+        /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
+        $authorizer = $this->ci->authorizer;
+        /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */
+        $currentUser = $this->ci->currentUser;
+        // Access-controlled page
+        if (!$authorizer->checkAccess($currentUser, 'view_list_subscriptions', [
+            'mailing_list' => $mailingList,
+            'group' => $mailingList->group
+        ])) {
+            throw new ForbiddenException();
+        }
+        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
+        $classMapper = $this->ci->classMapper;
+        $sprunje = $classMapper->createInstance('subscription_sprunje', $classMapper, $params);
+        // Be careful how you consume this data - it has not been escaped and contains untrusted user-supplied content.
+        // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
+        $query = $mailingList->subscriptions();
+        $query = $query->join('subscribers', function ($join) {
+            $join->on('subscriber_subscription.subscriber_id', 'subscriber.id');
+        });
+        $sprunje->setQuery($query);
+        return $sprunje->toResponse($response);
+    }
+
     public function pageInfo(Request $request, Response $response, $args)
     {
         $mailingList = $this->getMailingListFromParams($args);

@@ -112,7 +112,8 @@ class GroupMailingController extends GroupController
             'form' => [
                 'method' => 'POST',
                 'action' => "api/g/{$group->slug}/mailing_lists/ml/{$mailingList->slug}"
-            ]
+            ],
+            'editable' => TRUE
         ]);
     }
 

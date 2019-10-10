@@ -30,7 +30,9 @@ class Subscription extends Model
 
     protected $dates = [];
 
-    protected $casts = [];
+    protected $casts = [
+        'data' => 'array'
+    ];
 
     public function mailingList()
     {

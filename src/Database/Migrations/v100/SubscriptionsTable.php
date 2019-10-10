@@ -22,7 +22,10 @@ class SubscriptionsTable extends Migration
                 $table->increments('id');
                 $table->integer('mailing_list_id')->unsigned();
                 $table->integer('subscriber_id')->unsigned();
+                $table->string('name', 255);
+                $table->unsignedInteger('group_id')->default(null)->nullable();
                 $table->boolean('enabled')->default(TRUE);
+
                 $table->json('data')->nullable();
 
                 $table->timestamps();
@@ -32,6 +35,7 @@ class SubscriptionsTable extends Migration
 
                 $table->foreign('mailing_list_id')->references('id')->on('mailing_lists')->onDelete('cascade')->onUpdate('cascade');
                 $table->foreign('subscriber_id')->references('id')->on('subscribers')->onDelete('cascade')->onUpdate('cascade');
+                $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade')->onUpdate('cascade');
 
                 $table->engine = 'InnoDB';
                 $table->collation = 'utf8mb4_unicode_520_ci';

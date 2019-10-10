@@ -7,6 +7,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Exception\NotFoundException;
 use UserFrosting\Fortress\Adapter\JqueryValidationAdapter;
+use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestDataTransformer;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaRepository;
 use UserFrosting\Fortress\ServerSideValidator;

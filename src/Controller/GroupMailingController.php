@@ -111,7 +111,7 @@ class GroupMailingController extends GroupController
             'groups' => $classMapper->staticMethod('group', 'where', 'slug', '!=', 'default')->get(),
             'form' => [
                 'method' => 'POST',
-                'action' => "api/g/{$group->slug}/mailing_lists/ml/{$mailingList->slug}"
+                'action' => "api/groups/g/{$group->slug}/mailing_lists/ml/{$mailingList->slug}"
             ],
             'editable' => TRUE
         ]);

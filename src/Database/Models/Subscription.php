@@ -45,4 +45,12 @@ class Subscription extends Model
 
         return $this->belongsTo($classMapper->getClassMapping('subscriber'));
     }
+
+    public function group()
+    {
+        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
+        $classMapper = static::$ci->classMapper;
+
+        return $this->belongsTo($classMapper->getClassMapping('group'), 'group_id');
+    }
 }

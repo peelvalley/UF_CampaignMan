@@ -40,7 +40,7 @@ class CampaignManPermissions extends BaseSeed
 
             'group_create_subscription' => new Permission([
                 'slug' => 'create_subscription',
-                'name' => 'Create group mailing list',
+                'name' => 'Create group mailing list subscription',
                 'conditions' => 'equals_num(self.group_id, group.id)',
                 'description' => "Enables the user to create subscriptions to their own group's mailing lists"
             ]),

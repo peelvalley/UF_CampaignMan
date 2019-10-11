@@ -1,7 +1,7 @@
 /**
  * Set up the form in a modal after being successfully attached to the body.
  */
-function attachSubscriberForm() {
+function attachSubscriptionForm() {
     $("body").on('renderSuccess.ufModal', function(data) {
         var modal = $(this).ufModal('getModal');
         var form = modal.find('.js-form');
@@ -29,7 +29,7 @@ function attachSubscriberForm() {
  * @param {module:jQuery} el jQuery wrapped element to target.
  * @param {{delete_redirect: string}} options Options used to modify behaviour of button actions.
  */
-function bindSubscriberButtons(el, options) {
+function bindSubscriptionButtons(el, options) {
     if (!options) options = {};
 
     /**
@@ -40,18 +40,18 @@ function bindSubscriberButtons(el, options) {
      * Buttons that launch a modal dialog
      */
     // Edit mailing list details button
-    el.find('.js-subscriber-edit').click(function(e) {
+    el.find('.js-subscription-edit').click(function(e) {
         e.preventDefault();
 
         $("body").ufModal({
-            sourceUrl: site.uri.public + "/modals/subscriber/edit",
+            sourceUrl: site.uri.public + "/modals/subscription/edit",
             ajaxParams: {
                 ml_id: $(this).data('id')
             },
             msgTarget: $("#alerts-page")
         });
 
-        attachSubscriberForm();
+        attachSubscriptionForm();
     });
 
     // Delete mailing list button
@@ -79,16 +79,16 @@ function bindSubscriberButtons(el, options) {
     });
 }
 
-function bindSubscriberCreationButton(el) {
+function bindSubscriptionCreationButton(el) {
     // Link create button
-    el.find('.js-subscriber-create').click(function(e) {
+    el.find('.js-subscription-create').click(function(e) {
         e.preventDefault();
 
         $("body").ufModal({
-            sourceUrl: site.uri.public + "/modals/subscriber/create",
+            sourceUrl: site.uri.public + "/modals/subscription/create",
             msgTarget: $("#alerts-page")
         });
 
-        attachSubscriberForm();
+        attachSubscriptionForm();
     });
 };

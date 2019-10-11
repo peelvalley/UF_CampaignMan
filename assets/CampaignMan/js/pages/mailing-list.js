@@ -6,10 +6,10 @@ $(document).ready(function() {
     });
 
     // Bind creation button
-    bindSubscriberCreationButton($("#widget-subscriptions"));
+    bindSubscriptionCreationButton($("#widget-subscriptions"));
 
     // Bind table buttons
     $("#widget-subscriber").on("pagerComplete.ufTable", function () {
-        bindSubscriberButtons($(this));
+        bindSubscriptionButtons($(this));
     });
 });

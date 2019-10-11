@@ -14,7 +14,7 @@ use UserFrosting\Sprinkle\Core\Sprunje\Sprunje;
  *
  * @author PeelValley Software (https://peelvalley.com.au)
  */
-class SubscriberSprunje extends Sprunje
+class SubscriptionSprunje extends Sprunje
 {
     protected $name = 'subscribers';
 

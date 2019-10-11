@@ -101,7 +101,7 @@ class MailingListController extends SimpleController
         // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
         $query = $mailingList->subscriptions();
         $query = $query->join('subscribers', function ($join) {
-            $join->on('subscriber_subscription.subscriber_id', 'subscriber.id');
+            $join->on('subscriber_subscription.subscriber_id', 'subscribers.id');
         });
         $sprunje->setQuery($query);
         return $sprunje->toResponse($response);

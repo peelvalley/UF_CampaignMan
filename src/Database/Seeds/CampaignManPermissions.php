@@ -42,7 +42,7 @@ class CampaignManPermissions extends BaseSeed
                 'slug' => 'create_subscription',
                 'name' => 'Create group mailing list subscription',
                 'conditions' => 'equals_num(self.group_id, group.id)',
-                'description' => "Enables the user to create subscriptions to their own group's mailing lists"
+                'description' => 'Enables the user to create list subscriptions for their own group'
             ]),
 
             'group_view_mailing_lists' => new Permission([
@@ -54,9 +54,16 @@ class CampaignManPermissions extends BaseSeed
 
             'group_view_mailing_list' => new Permission([
                 'slug' => 'view_mailing_list',
-                'name' => 'View group mailing list',
+                'name' => 'View group mailing list details',
                 'conditions' => 'equals_num(self.group_id, group.id)',
                 'description' => 'Enables the user to view mailing list details for their own group'
+            ]),
+
+            'group_view_list_subscriptions' => new Permission([
+                'slug' => 'view_list_subscriptions',
+                'name' => 'View group mailing list subscribers',
+                'conditions' => 'equals_num(self.group_id, group.id)',
+                'description' => 'Enables the user to view list subscribers for their own group'
             ]),
 
             'view_mailing_lists' => new Permission([
@@ -98,10 +105,12 @@ class CampaignManPermissions extends BaseSeed
         $roleGroupAdmin = Role::where('slug', 'group-admin')->first();
         if ($roleGroupAdmin) {
             $roleGroupAdmin->permissions()->syncWithoutDetaching([
+                $permissions['group_view_list_subscriptions']->id,
                 $permissions['group_create_mailing_list']->id,
                 $permissions['group_create_subscription']->id,
                 $permissions['group_view_mailing_lists']->id,
                 $permissions['group_view_mailing_list']->id
+                
 
             ]);
         }

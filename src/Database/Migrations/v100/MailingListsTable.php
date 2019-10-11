@@ -29,6 +29,8 @@ class MailingListsTable extends Migration
                 $table->softDeletes();
                 $table->timestamps();
 
+                $table->unique(['group_id', 'slug']);
+
                 $table->engine = 'InnoDB';
                 $table->collation = 'utf8mb4_unicode_520_ci';
                 $table->charset = 'utf8mb4';

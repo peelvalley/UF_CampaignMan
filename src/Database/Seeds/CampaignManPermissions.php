@@ -38,11 +38,25 @@ class CampaignManPermissions extends BaseSeed
                 'description' => 'Enables the user to create mailing lists for their own group'
             ]),
 
-            'group_view_mailing_list' => new Permission([
+            'group_create_subscription' => new Permission([
+                'slug' => 'create_subscription',
+                'name' => 'Create group mailing list',
+                'conditions' => 'equals_num(self.group_id, group.id)',
+                'description' => "Enables the user to create subscriptions to their own group's mailing lists"
+            ]),
+
+            'group_view_mailing_lists' => new Permission([
                 'slug' => 'view_mailing_lists',
                 'name' => 'View group mailing lists',
                 'conditions' => 'equals_num(self.group_id, group.id)',
                 'description' => 'Enables the user to view all mailing lists for their own group'
+            ]),
+
+            'group_view_mailing_list' => new Permission([
+                'slug' => 'view_mailing_list',
+                'name' => 'View group mailing list',
+                'conditions' => 'equals_num(self.group_id, group.id)',
+                'description' => 'Enables the user to view mailing list details for their own group'
             ]),
 
             'view_mailing_lists' => new Permission([
@@ -84,8 +98,11 @@ class CampaignManPermissions extends BaseSeed
         $roleGroupAdmin = Role::where('slug', 'group-admin')->first();
         if ($roleGroupAdmin) {
             $roleGroupAdmin->permissions()->syncWithoutDetaching([
-                $permissions['group_create_mailing_list']->id,
+                $permissions['group_create_mailing_lists']->id,
+                $permissions['group_create_subscription']->id,
+                $permissions['group_view_mailing_lists']->id,
                 $permissions['group_view_mailing_list']->id
+
             ]);
         }
 

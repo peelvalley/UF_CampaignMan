@@ -11,9 +11,9 @@
     <table id="{{table.id}}" class="tablesorter table table-bordered table-hover table-striped" data-sortlist="{{table.sortlist}}">
         <thead>
             <tr>
-                <th class="sorter-metatext" data-column-name="name" data-column-template="#sub-table-column-name" data-priority="1">Name</th>
+                <th class="sorter-metatext" data-column-name="subscriber_name" data-column-template="#sub-table-column-name" data-priority="1">Name</th>
                 <th class="sorter-metatext" data-column-name="email" data-column-template="#sub-table-column-email" data-priority="2">Email</th>
-                <th class="sorter-metatext" data-column-name="group" data-column-template="#sub-table-column-group" data-priority="3">Group</th>
+                <th class="sorter-metatext" data-column-name="group_id" data-column-template="#sub-table-column-group" data-priority="3">Group</th>
                 <th data-column-name="actions" data-column-template="#sub-table-column-actions" data-sorter="false" data-filter="false" data-priority="1">{{translate("ACTIONS")}}</th>
             </tr>
         </thead>
@@ -31,8 +31,8 @@
     #}
     {% verbatim %}
     <script id="sub-table-column-name" type="text/x-handlebars-template">
-        <td data-text="{{row.name}}">
-           <span>{{row.name}}</span>
+        <td data-text="{{row.subscriber_name}}">
+           <span>{{row.subscriber_name}}</span>
         </td>
     </script>
     <script id="sub-table-column-email" type="text/x-handlebars-template">
@@ -41,7 +41,7 @@
         </td>
     </script>
     <script id="sub-table-column-group" type="text/x-handlebars-template">
-        <td data-text="{{row.group}}">
+        <td data-text="{{row.group.name}}">
            <span>{{row.group}}</span>
         </td>
     </script>

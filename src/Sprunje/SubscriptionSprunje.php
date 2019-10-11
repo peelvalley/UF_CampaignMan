@@ -23,11 +23,15 @@ class SubscriptionSprunje extends Sprunje
     ];
 
     protected $sortable = [
-        'email'
+        'subscriber_name',
+        'email',
+        'group'
     ];
 
     protected $filterable = [
-        'email'
+        'subscriber_name',
+        'email',
+        'group'
     ];
 
     /**

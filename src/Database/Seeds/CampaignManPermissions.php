@@ -110,8 +110,6 @@ class CampaignManPermissions extends BaseSeed
                 $permissions['group_create_subscription']->id,
                 $permissions['group_view_mailing_lists']->id,
                 $permissions['group_view_mailing_list']->id
-                
-
             ]);
         }
 

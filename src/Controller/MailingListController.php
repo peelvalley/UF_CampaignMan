@@ -103,6 +103,7 @@ class MailingListController extends SimpleController
         $query = $query->join('subscribers', function ($join) {
             $join->on('subscriber_subscription.subscriber_id', 'subscribers.id');
         });
+        $query->with('group');
         $sprunje->setQuery($query);
         return $sprunje->toResponse($response);
     }

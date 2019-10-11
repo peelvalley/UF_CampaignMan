@@ -115,11 +115,6 @@ class GroupMailingController extends GroupController
        // Whitelist and set parameter defaults
        $subscriptionTransformer = new RequestDataTransformer($subscriptionSchema);
        $subscriptionData = $subscriptionTransformer->transform($params);
-       $ms->addMessage('info', json_encode([
-           'params' => $params,
-           'schema' => $subscriptionSchema->all(),
-           'subscriptionData' => $subscriptionData
-    ]));
        // Validate request data
        $subscriptionValidator = new ServerSideValidator($subscriptionSchema, $this->ci->translator);
        if (!$subscriptionValidator->validate($subscriptionData)) {

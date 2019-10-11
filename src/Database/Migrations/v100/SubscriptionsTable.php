@@ -22,7 +22,7 @@ class SubscriptionsTable extends Migration
                 $table->increments('id');
                 $table->integer('mailing_list_id')->unsigned();
                 $table->integer('subscriber_id')->unsigned();
-                $table->string('name', 255)->default(null)->nullable();
+                $table->string('subscriber_name', 255)->default(null)->nullable();
                 $table->unsignedInteger('group_id')->default(null)->nullable();
                 $table->boolean('enabled')->default(TRUE);
 

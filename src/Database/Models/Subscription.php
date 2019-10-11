@@ -18,7 +18,7 @@ class Subscription extends Model
         'mailing_list_id',
         'subscriber_id',
         'enabled',
-        'name',
+        'subscriber_name',
         'group_id',
         'data'
     ];

@@ -12,6 +12,6 @@ group_id:
   transformations:
     - trim
 
-name:
+subscriber_name:
   transformations:
     - trim

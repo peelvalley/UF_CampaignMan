@@ -112,6 +112,7 @@ class GroupMailingController extends GroupController
        }
 
        $subscriptionSchema = new RequestSchema('schema://requests/subscription/data.yaml');
+       $ms->addMessage('info', json_encode($subscriptionSchema->all()));
        // Whitelist and set parameter defaults
        $subscriptionTransformer = new RequestDataTransformer($subscriptionSchema);
        $subscriptionData = $subscriptionTransformer->transform($params);

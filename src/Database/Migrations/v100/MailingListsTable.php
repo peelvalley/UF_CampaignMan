@@ -25,6 +25,7 @@ class MailingListsTable extends Migration
                 $table->string('description', 255);
                 $table->json('metadata')->nullable();
                 $table->index('slug');
+                $table->index('group_id');
                 $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade')->onUpdate('cascade');
                 $table->softDeletes();
                 $table->timestamps();

@@ -43,8 +43,8 @@ class CampaignSubsTable extends Migration
     */
     public function down()
     {
-        if ($this->schema->hasTable('campaign_subscribers')) {
-            $this->schema->drop('campaign_subscribers');
+        if ($this->schema->hasTable('campaign_subscriber')) {
+            $this->schema->drop('campaign_subscriber');
         }
     }
 }

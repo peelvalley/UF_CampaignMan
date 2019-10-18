@@ -25,13 +25,12 @@ class SubscriptionSprunje extends Sprunje
     protected $sortable = [
         'subscriber_name',
         'email',
-        'group'
     ];
 
     protected $filterable = [
         'subscriber_name',
         'email',
-        'group'
+        'group_name'
     ];
 
     /**
@@ -41,5 +40,33 @@ class SubscriptionSprunje extends Sprunje
     {
         $query = $this->classMapper->getClassMapping('subscription');
         return $query;
+    }
+
+    protected function filterGroupName($query, $value)
+    {
+        // Split value on separator for OR queries
+        $values = explode($this->orSeparator, $value);
+        $query->whereHas('group', function($q){
+            $q->where(function ($query) use ($values) {
+                foreach ($values as $value) {
+                    $query->orLike('name', $value);
+                }
+            });
+        });
+        return $this;
+    }
+
+    /**
+     * Sort based on last name.
+     *
+     * @param Builder $query
+     * @param string  $direction
+     *
+     * @return self
+     */
+    protected function sortName($query, $direction)
+    {
+        $query->orderBy('last_name', $direction);
+        return $this;
     }
 }

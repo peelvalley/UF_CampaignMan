@@ -46,7 +46,7 @@ function bindSubscriptionButtons(el, options) {
         $("body").ufModal({
             sourceUrl: site.uri.public + "/modals/subscriptions/edit",
             ajaxParams: {
-                ml_id: $(this).data('subscriptionId')
+                subscription_id: $(this).data('subscriptionId')
             },
             msgTarget: $("#alerts-page")
         });
@@ -61,7 +61,7 @@ function bindSubscriptionButtons(el, options) {
         $("body").ufModal({
             sourceUrl: site.uri.public + "/modals/subscriptions/confirm-unsubscribe",
             ajaxParams: {
-                subscription_id: $(this).data('id')
+                subscription_id: $(this).data('subscriptionId')
             },
             msgTarget: $("#alerts-page")
         });

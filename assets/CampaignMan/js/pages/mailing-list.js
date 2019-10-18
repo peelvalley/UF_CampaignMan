@@ -9,7 +9,7 @@ $(document).ready(function() {
     bindSubscriptionCreationButton($("#widget-subscriptions"));
 
     // Bind table buttons
-    $("#widget-subscriber").on("pagerComplete.ufTable", function () {
+    $("#widget-subscriptions").on("pagerComplete.ufTable", function () {
         bindSubscriptionButtons($(this));
     });
 });

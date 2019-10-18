@@ -41,4 +41,12 @@ class Campaign extends Model
         return $this->belongsToMany($classMapper->getClassMapping('subscriber'), $classMapper->getClassMapping('campaign_sub'));
     }
 
+    public function group()
+    {
+        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
+        $classMapper = static::$ci->classMapper;
+
+        return $this->belongsTo($classMapper->getClassMapping('group'), 'group_id');
+    }
+
 }

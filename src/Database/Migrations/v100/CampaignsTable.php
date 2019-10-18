@@ -15,6 +15,7 @@ class CampaignsTable extends Migration
         if (!$this->schema->hasTable('campaigns')) {
             $this->schema->create('campaigns', function (Blueprint $table) {
                 $table->increments('id');
+                $table->unsignedInteger('group_id')->default(null)->nullable();
                 $table->string('status', 15);
                 $table->json('metadata')->nullable();
 
@@ -22,6 +23,8 @@ class CampaignsTable extends Migration
                 $table->timestamps();
 
                 $table->index('status');
+                $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade')->onUpdate('cascade');
+
 
                 $table->engine = 'InnoDB';
                 $table->collation = 'utf8mb4_unicode_520_ci';

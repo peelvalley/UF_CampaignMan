@@ -50,6 +50,16 @@
             <div class="btn-group">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">{% endverbatim %}{{translate("ACTIONS")}}{% verbatim %}<span class="caret"></span></button>
                 <ul class="dropdown-menu dropdown-menu-right-responsive" role="menu">
+                        <li>
+                            <a href="#" data-subscription-id="{{row.id}}" class="js-subscription-edit">
+                                <i class="fas fa-edit"></i> {% endverbatim %}{{translate("EDIT")}}{% verbatim %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" data-subscription-id="{{row.id}}" class="js-unsubscribe">
+                                <i class="fas fa-ban"></i> {% endverbatim %}{{translate("UNSUBSCRIBE")}}{% verbatim %}
+                            </a>
+                        </li>
                 </ul>
             </div>
         </td>

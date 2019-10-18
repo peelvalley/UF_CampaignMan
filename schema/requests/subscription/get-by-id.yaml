@@ -1,0 +1,11 @@
+---
+subscription_id:
+  validators:
+    integer:
+      label: "&Subscription ID"
+      message: VALIDATE.INTEGER
+    required:
+      label: "&Subscription ID"
+      message: VALIDATE.REQUIRED
+  transformations:
+    - trim

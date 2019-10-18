@@ -26,7 +26,9 @@ class SubscriptionController extends SimpleController
 
     public function getModalEdit(Request $request, Response $response, $args)
     {
-        $subscription = $this->getSubscriptionFromParams($args);
+        // GET parameters
+        $params = $request->getQueryParams();
+        $subscription = $this->getSubscriptionFromParams($params);
 
         // If the subscription no longer exists, return 404
         if (!$subscription) {

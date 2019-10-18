@@ -18,6 +18,6 @@ $app->group('/api/subscriptions', function () {
 })->add('authGuard')->add(new NoCache());
 
 $app->group('/modals/subscriptions', function () {
-    $this->get('/create', 'UserFrosting\Sprinkle\CampaignMan\Controller\SubscriptionController:getModalEdit');
+    $this->get('/edit', 'UserFrosting\Sprinkle\CampaignMan\Controller\SubscriptionController:getModalEdit');
     $this->get('/confirm-unsubscribe', 'UserFrosting\Sprinkle\CampaignMan\Controller\SubscriptionController:getModalConfirmUnsubscribe');
 })->add('authGuard')->add(new NoCache());

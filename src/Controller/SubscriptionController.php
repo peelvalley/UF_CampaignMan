@@ -12,11 +12,7 @@ use UserFrosting\Fortress\ServerSideValidator;
 use UserFrosting\Sprinkle\CampaignMan\Fortress\RequestDataTransformer;
 use UserFrosting\Sprinkle\Core\Controller\SimpleController;
 use UserFrosting\Support\Exception\ForbiddenException;
-
-
-
-
-
+use UserFrosting\Support\Exception\BadRequestException;
 
 
 class SubscriptionController extends SimpleController

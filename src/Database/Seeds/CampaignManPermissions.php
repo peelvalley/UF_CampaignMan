@@ -66,6 +66,13 @@ class CampaignManPermissions extends BaseSeed
                 'description' => 'Enables the user to view list subscribers for their own group'
             ]),
 
+            'group_update_subscription_field' => new Permission([
+                'slug' => 'update_subscription_field',
+                'name' => 'View group mailing list subscribers',
+                'conditions' => "equals_num(self.group_id, group.id) && subset(fields,['group_id', 'subscriber_name', 'data'])",
+                'description' => 'Enables the user to view list subscribers for their own group'
+            ]),
+
             'view_mailing_lists' => new Permission([
                 'slug' => 'view_mailing_lists',
                 'name' => 'View site mailing lists',
@@ -105,6 +112,7 @@ class CampaignManPermissions extends BaseSeed
         $roleGroupAdmin = Role::where('slug', 'group-admin')->first();
         if ($roleGroupAdmin) {
             $roleGroupAdmin->permissions()->syncWithoutDetaching([
+                $permissions['group_update_subscription_field']->id,
                 $permissions['group_view_list_subscriptions']->id,
                 $permissions['group_create_mailing_list']->id,
                 $permissions['group_create_subscription']->id,

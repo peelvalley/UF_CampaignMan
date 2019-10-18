@@ -18,8 +18,8 @@ class CampaignSubsTable extends Migration
     */
     public function up()
     {
-        if (!$this->schema->hasTable('campaign_subs')) {
-            $this->schema->create('campaign_subs', function (Blueprint $table) {
+        if (!$this->schema->hasTable('campaign_subscribers')) {
+            $this->schema->create('campaign_subscribers', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('campaign_id')->unsigned();
                 $table->integer('subscriber_id')->unsigned();

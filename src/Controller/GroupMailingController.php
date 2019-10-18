@@ -11,7 +11,6 @@ use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Sprinkle\CampaignMan\Fortress\RequestDataTransformer;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaRepository;
 use UserFrosting\Fortress\ServerSideValidator;
-use UserFrosting\Sprinkle\Account\Database\Models\Group;
 use UserFrosting\Sprinkle\Admin\Controller\GroupController;
 use UserFrosting\Support\Exception\ForbiddenException;
 

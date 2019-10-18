@@ -24,6 +24,8 @@ class CampaignSubsTable extends Migration
                 $table->integer('campaign_id')->unsigned();
                 $table->integer('subscriber_id')->unsigned();
                 $table->string('status', 15);
+                $table->json('data')->nullable();
+
 
                 $table->timestamps();
 

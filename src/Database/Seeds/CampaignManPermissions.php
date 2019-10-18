@@ -68,9 +68,9 @@ class CampaignManPermissions extends BaseSeed
 
             'group_update_subscription_field' => new Permission([
                 'slug' => 'update_subscription_field',
-                'name' => 'View group mailing list subscribers',
+                'name' => 'Update subscription details',
                 'conditions' => "equals_num(self.group_id, group.id) && subset(fields,['group_id', 'subscriber_name', 'data'])",
-                'description' => 'Enables the user to view list subscribers for their own group'
+                'description' => 'Enables the user to update list subscription details for their own group'
             ]),
 
             'view_mailing_lists' => new Permission([

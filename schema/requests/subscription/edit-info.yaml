@@ -2,6 +2,8 @@
 group_id:
   validators:
     integer:
+      label: "&Group ID"
+      message: VALIDATE.INTEGER
   transformations:
     - trim
 

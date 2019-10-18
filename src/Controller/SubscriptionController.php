@@ -90,7 +90,7 @@ class SubscriptionController extends SimpleController
 
             foreach ($subscriptionData as $name => $value) {
                 if ($value != $subscription->$data[$name]) {
-                    $subscription->update("data->$name", $value);
+                    $subscription->update(["data->$name" => $value]);
                 }
             }
             $subscription->save();

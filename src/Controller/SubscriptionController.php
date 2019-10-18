@@ -125,6 +125,10 @@ class SubscriptionController extends SimpleController
         /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
         $classMapper = $this->ci->classMapper;
 
+        // Load validation rules
+        $schema = new RequestSchema('schema://requests/subscription/edit-info.yaml');
+        $validator = new JqueryValidationAdapter($schema, $this->ci->translator);
+
         return $this->ci->view->render($response, 'CampaignMan/modals/subscription.html.twig', [
             'groups' => $classMapper->staticMethod('group', 'get'),
             'subscription' => $subscription,
@@ -134,6 +138,9 @@ class SubscriptionController extends SimpleController
                 'fields' => [
                     'disabled' => ['email']
                 ]
+            ],
+            'page' => [
+                'validators' => $validator->rules('json', false),
             ],
             'editable' => TRUE  //TODO add access control
         ]);

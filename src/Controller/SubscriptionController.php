@@ -9,12 +9,10 @@ use UserFrosting\Fortress\Adapter\JqueryValidationAdapter;
 use UserFrosting\Fortress\RequestSchema;
 use UserFrosting\Fortress\RequestSchema\RequestSchemaRepository;
 use UserFrosting\Fortress\ServerSideValidator;
+use UserFrosting\Sprinkle\CampaignMan\Fortress\RequestDataTransformer;
 use UserFrosting\Sprinkle\Core\Controller\SimpleController;
-use UserFrosting\Sprinkle\Core\Util\EnvironmentInfo;
-use UserFrosting\Sprinkle\FormGenerator\Form;
-use UserFrosting\Sprinkle\UserProfile\Util\UserProfileHelper;
 use UserFrosting\Support\Exception\ForbiddenException;
-use UserFrosting\Support\Repository\Loader\YamlFileLoader;
+
 
 
 

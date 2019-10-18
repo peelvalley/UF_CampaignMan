@@ -1,0 +1,10 @@
+---
+group_id:
+  validators:
+    integer:
+  transformations:
+    - trim
+
+subscriber_name:
+  transformations:
+    - trim

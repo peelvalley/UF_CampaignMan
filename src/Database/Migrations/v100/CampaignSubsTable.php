@@ -31,7 +31,7 @@ class CampaignSubsTable extends Migration
                 $table->index('status');
                 $table->foreign('campaign_id', 'fk_campaigns')->references('id')->on('campaigns')->onDelete('cascade')->onUpdate('cascade');
                 $table->foreign('subscriber_subscription_id', 'fk_subscriptions')->references('id')->on('subscriber_subscription')->onDelete('cascade')->onUpdate('cascade');
-                $table->unique(['campaign_id', 'subscriber_subscription_id']);
+                $table->unique(['campaign_id', 'subscriber_subscription_id'], 'ui_campaign_subscription');
 
                 $table->engine = 'InnoDB';
                 $table->collation = 'utf8mb4_unicode_520_ci';

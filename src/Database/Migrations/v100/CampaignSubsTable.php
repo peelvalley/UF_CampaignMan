@@ -24,11 +24,14 @@ class CampaignSubsTable extends Migration
                 $table->integer('campaign_id')->unsigned();
                 $table->integer('subscriber_subscription_id')->unsigned();
                 $table->string('status', 15);
+                $table->boolean('enabled');
                 $table->json('data')->nullable();
 
                 $table->timestamps();
 
                 $table->index('status');
+                $table->index('enabled');
+
                 $table->foreign('campaign_id', 'fk_campaigns')->references('id')->on('campaigns')->onDelete('cascade')->onUpdate('cascade');
                 $table->foreign('subscriber_subscription_id', 'fk_subscriptions')->references('id')->on('subscriber_subscription')->onDelete('cascade')->onUpdate('cascade');
                 $table->unique(['campaign_id', 'subscriber_subscription_id'], 'ui_campaign_subscription');

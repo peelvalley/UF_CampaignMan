@@ -29,8 +29,8 @@ class CampaignSubsTable extends Migration
                 $table->timestamps();
 
                 $table->index('status');
-                $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade')->onUpdate('cascade');
-                $table->foreign('subscriber_subscription_id')->references('id')->on('subscriber_subscription')->onDelete('cascade')->onUpdate('cascade');
+                $table->foreign('campaign_id', 'fk_campaigns')->references('id')->on('campaigns')->onDelete('cascade')->onUpdate('cascade');
+                $table->foreign('subscriber_subscription_id', 'fk_subscriptions')->references('id')->on('subscriber_subscription')->onDelete('cascade')->onUpdate('cascade');
                 $table->unique(['campaign_id', 'subscriber_subscription_id']);
 
                 $table->engine = 'InnoDB';

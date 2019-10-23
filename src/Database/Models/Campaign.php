@@ -33,13 +33,13 @@ class Campaign extends Model
         'metadata' => 'array'
     ];
 
-    public function subscribers()
-    {
-        /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
-        $classMapper = static::$ci->classMapper;
+    // public function subscribers()
+    // {
+    //     /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
+    //     $classMapper = static::$ci->classMapper;
 
-        return $this->belongsToMany($classMapper->getClassMapping('subscriber'), $classMapper->getClassMapping('campaign_sub'));
-    }
+    //     return $this->belongsToMany($classMapper->getClassMapping('subscriber'), $classMapper->getClassMapping('campaign_sub'));
+    // }
 
     public function subscriptions()
     {

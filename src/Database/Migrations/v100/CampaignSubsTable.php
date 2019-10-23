@@ -23,8 +23,8 @@ class CampaignSubsTable extends Migration
                 $table->increments('id');
                 $table->integer('campaign_id')->unsigned();
                 $table->integer('subscriber_subscription_id')->unsigned();
-                $table->string('status', 15);
-                $table->boolean('enabled');
+                $table->string('status', 15)->default('pending');
+                $table->boolean('enabled')->default(TRUE);
                 $table->json('data')->nullable();
 
                 $table->timestamps();

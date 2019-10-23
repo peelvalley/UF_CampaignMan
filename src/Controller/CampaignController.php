@@ -23,8 +23,7 @@ class CampaignController extends GroupController
 
         // If the campaign no longer exists, forward to dashboard page
         if (!$campaign) {
-            $redirectPage = $this->ci->router->pathFor('uri_dashboard');
-            return $response->withRedirect($redirectPage, 404);
+            return $response->withStatus(404);
         }
 
         /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */

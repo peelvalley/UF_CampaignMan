@@ -23,9 +23,8 @@ class CampaignController extends GroupController
 
         // If the campaign no longer exists, forward to dashboard page
         if (!$campaign) {
-            return $response->withStatus(404);  //TODO set redirect
+            throw new NotFoundException($request, $response);
         }
-
         /** @var \UserFrosting\Sprinkle\Account\Authorize\AuthorizationManager $authorizer */
         $authorizer = $this->ci->authorizer;
         /** @var \UserFrosting\Sprinkle\Account\Database\Models\Interfaces\UserInterface $currentUser */

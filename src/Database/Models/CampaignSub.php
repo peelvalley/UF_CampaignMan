@@ -38,11 +38,11 @@ class CampaignSub extends Model
     }
 
 
-    public function subscriber()
+    public function subscription()
     {
         /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
         $classMapper = static::$ci->classMapper;
 
-        return $this->belongsTo($classMapper->getClassMapping('subscriber'));
+        return $this->belongsTo($classMapper->getClassMapping('subscription'));
     }
 }

@@ -15,7 +15,7 @@ use UserFrosting\Sprinkle\Admin\Controller\GroupController;
 use UserFrosting\Support\Exception\ForbiddenException;
 
 
-class Campaignontroller extends GroupController
+class CampaignController extends GroupController
 {
     public function pageInfo(Request $request, Response $response, $args)
     {

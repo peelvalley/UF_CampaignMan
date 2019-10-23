@@ -22,7 +22,7 @@ class CampaignSubsTable extends Migration
             $this->schema->create('campaign_subscriber', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('campaign_id')->unsigned();
-                $table->integer('subscriber_subscription_id')->unsigned();
+                $table->integer('subscription_id')->unsigned();
                 $table->string('status', 15)->default('pending');
                 $table->boolean('enabled')->default(TRUE);
                 $table->json('data')->nullable();
@@ -33,8 +33,8 @@ class CampaignSubsTable extends Migration
                 $table->index('enabled');
 
                 $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade')->onUpdate('cascade');
-                $table->foreign('subscriber_subscription_id', 'fk_subscriptions')->references('id')->on('subscriber_subscription')->onDelete('cascade')->onUpdate('cascade');
-                $table->unique(['campaign_id', 'subscriber_subscription_id'], 'ui_campaign_subscription');
+                $table->foreign('subscription_id')->references('id')->on('subscriber_subscription')->onDelete('cascade')->onUpdate('cascade');
+                $table->unique(['campaign_id', 'subscription_id']);
 
                 $table->engine = 'InnoDB';
                 $table->collation = 'utf8mb4_unicode_520_ci';

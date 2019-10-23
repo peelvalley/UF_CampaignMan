@@ -16,7 +16,7 @@ class CampaignsTable extends Migration
             $this->schema->create('campaigns', function (Blueprint $table) {
                 $table->increments('id');
                 $table->unsignedInteger('group_id')->default(null)->nullable();
-                $table->string('status', 15);
+                $table->string('status', 15)->default('pending');
                 $table->json('metadata')->nullable();
 
                 $table->softDeletes();

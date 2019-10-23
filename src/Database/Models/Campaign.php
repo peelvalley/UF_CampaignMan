@@ -46,7 +46,7 @@ class Campaign extends Model
         /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
         $classMapper = static::$ci->classMapper;
 
-        return $this->hasMany($classMapper->getClassMapping('campaign_sub'));
+        return $this->belongsToMany($classMapper->getClassMapping('subscription'), $classMapper->getClassMapping('campaign_sub'));
     }
 
     public function group()

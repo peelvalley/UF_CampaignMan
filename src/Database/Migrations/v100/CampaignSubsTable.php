@@ -18,8 +18,8 @@ class CampaignSubsTable extends Migration
     */
     public function up()
     {
-        if (!$this->schema->hasTable('campaign_subscriber_subscription')) {
-            $this->schema->create('campaign_subscriber_subscription', function (Blueprint $table) {
+        if (!$this->schema->hasTable('campaign_subscriber')) {
+            $this->schema->create('campaign_subscriber', function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('campaign_id')->unsigned();
                 $table->integer('subscriber_subscription_id')->unsigned();
@@ -32,7 +32,7 @@ class CampaignSubsTable extends Migration
                 $table->index('status');
                 $table->index('enabled');
 
-                $table->foreign('campaign_id', 'fk_campaigns')->references('id')->on('campaigns')->onDelete('cascade')->onUpdate('cascade');
+                $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade')->onUpdate('cascade');
                 $table->foreign('subscriber_subscription_id', 'fk_subscriptions')->references('id')->on('subscriber_subscription')->onDelete('cascade')->onUpdate('cascade');
                 $table->unique(['campaign_id', 'subscriber_subscription_id'], 'ui_campaign_subscription');
 

@@ -1,0 +1,11 @@
+---
+campaign_idd:
+  validators:
+    integer:
+      label: "&Campaign ID"
+      message: VALIDATE.INTEGER
+    required:
+      label: "&Campaign ID"
+      message: VALIDATE.REQUIRED
+  transformations:
+    - trim

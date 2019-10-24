@@ -19,15 +19,15 @@ class CampaignSubSprunje extends Sprunje
     protected $name = 'campaign_subscriber';
 
     protected $listable = [
-        'subscriber.email'
+        //'subscriber.email'
     ];
 
     protected $sortable = [
-        'subscriber.email'
+        //'subscriber.email'
     ];
 
     protected $filterable = [
-        'subscriber.email'
+        //'subscriber.email'
     ];
 
     /**

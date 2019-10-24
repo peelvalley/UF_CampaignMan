@@ -28,6 +28,7 @@ class ServicesProvider
             $classMapper->setClassMapping('subscriber_sprunje', 'UserFrosting\Sprinkle\CampaignMan\Sprunje\SubscriberSprunje');
             $classMapper->setClassMapping('subscription_sprunje', 'UserFrosting\Sprinkle\CampaignMan\Sprunje\SubscriptionSprunje');
             $classMapper->setClassMapping('mailing_list_sprunje', 'UserFrosting\Sprinkle\CampaignMan\Sprunje\MailingListSprunje');
+            $classMapper->setClassMapping('campaign_subs_sprunje', 'UserFrosting\Sprinkle\CampaignMan\Sprunje\CampaignSubSprunje');
             $classMapper->setClassMapping('mailing_queue_sprunje', 'UserFrosting\Sprinkle\CampaignMan\Sprunje\MailingQueueSprunje');
 
             return $classMapper;

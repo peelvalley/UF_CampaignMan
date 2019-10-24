@@ -67,10 +67,10 @@ class CampaignController extends GroupController
 
         /** @var \UserFrosting\Sprinkle\Core\Util\ClassMapper $classMapper */
         $classMapper = $this->ci->classMapper;
-        $sprunje = $classMapper->createInstance('campaign_subs_sprunje', $classMapper, $params);
+        $sprunje = $classMapper->createInstance('subscription_sprunje', $classMapper, $params);
         // Be careful how you consume this data - it has not been escaped and contains untrusted user-supplied content.
         // For example, if you plan to insert it into an HTML DOM, you must escape it on the client side (or use client-side templating).
-        $sprunje->setQuery($campaign->subscriptions());
+        $sprunje->setQuery($campaign->subscriptions()->with('subscriber_subscription'));
         return $sprunje->toResponse($response);
     }
 

@@ -1,5 +1,5 @@
 ---
-campaign_idd:
+campaign_id:
   validators:
     integer:
       label: "&Campaign ID"

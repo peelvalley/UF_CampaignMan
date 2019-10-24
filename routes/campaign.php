@@ -12,3 +12,12 @@ $app->group('/campaigns', function () {
     $this->get('/c/{campaign_id}', 'UserFrosting\Sprinkle\CampaignMan\Controller\CampaignController:pageInfo');
 
 })->add('authGuard')->add(new NoCache());
+
+$app->group('/api/campaigns', function () {
+
+
+    $this->get('/c/{campaign_id}/subscriptions', 'UserFrosting\Sprinkle\CampaignMan\Controller\CampaignController:getSubscriptions');
+
+
+
+})->add('authGuard')->add(new NoCache());

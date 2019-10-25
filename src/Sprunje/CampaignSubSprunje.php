@@ -18,9 +18,7 @@ class CampaignSubSprunje extends Sprunje
 {
     protected $name = 'campaign_subscriber';
 
-    protected $listable = [
-        'subscriber_name'
-    ];
+    protected $listable = [];
 
     protected $sortable = [
         'subscriber_name'

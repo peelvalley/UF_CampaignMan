@@ -32,6 +32,22 @@
                 }
             }
         },
+        "js/pages/campaign": {
+            "scripts": [
+                "CampaignMan/js/pages/mailing-list.js",
+                "CampaignMan/js/widgets/mailing-list.js"
+            ],
+            "options": {
+                "result": {
+                    "type": {
+                        "scripts": "plain"
+                    }
+                },
+                "sprinkle": {
+                    "onCollision": "merge"
+                }
+            }
+        },
         "js/pages/mailing-queue": {
             "scripts": [
                 "CampaignMan/js/pages/mailing-queue.js",

@@ -19,5 +19,11 @@ return [
     'SUBSCRIPTION' => [
         1 => 'Subscription',
         2 => 'Subscriptions'
+    ],
+    'CAMPAIGN' => [
+        'SUBSCRIBER' => [
+            1 => 'Campaign Subscriber',
+            2 => 'Campaign Subscribers'
+        ],
     ]
 ];
